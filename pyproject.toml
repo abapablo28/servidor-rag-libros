@@ -1,0 +1,19 @@
+[project]
+name = "servidor-rag-sap"
+version = "0.1.0"
+dependencies = [
+    "mcp",
+    "sentence-transformers",
+    "chromadb",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# --- ESTO ES LO QUE ARREGLA EL ERROR ---
+[tool.hatch.build.targets.wheel]
+packages = ["."] 
+
+[project.scripts]
+servidor-rag-sap = "server:mcp.run"

@@ -1,0 +1,16 @@
+# Entornos virtuales
+.venv/
+venv/
+
+# Bases de datos y archivos pesados
+base_vectores/
+*.zip
+*.7z
+
+# Carpetas locales privadas
+pdfs/
+respaldo/
+
+# Cache de Python
+__pycache__/
+*.pyc
