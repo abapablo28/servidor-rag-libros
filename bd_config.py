@@ -23,7 +23,7 @@ DB_PATH = os.path.join(BASE_DIR, "base_vectores")
 ZIP_PATH = os.path.join(BASE_DIR, "base_vectores.zip")
 
 # ACA DEBES PONER EL LINK DIRECTO DE DESCARGA DE TU ZIP
-URL_DEL_ZIP = "https://silverconsultingsas-my.sharepoint.com/:u:/g/personal/juan_metaute_silverconsulting_com_co/IQBlsM9KzTjNTZBn3xqMJIrOAeYiB967GCMxUUdn-vSAv_E?download=1"
+URL_DEL_ZIP = "https://huggingface.co/datasets/abappablo/rag-abap/resolve/main/base_vectores.zip"
 
 def asegurar_base_datos():
     """Verifica si la base de datos existe. Si no, la descarga y extrae automaticamente."""
