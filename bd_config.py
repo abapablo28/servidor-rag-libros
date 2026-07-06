@@ -3,6 +3,8 @@ import sys
 import warnings
 import zipfile
 import urllib.request
+# pyrefly: ignore [missing-import]
+import pip_system_certs.wrapt_requests # <-- Esto conecta Python con los certificados de Windows
 
 # 1. Apagar todos los mensajes y advertencias para no romper la comunicacion JSON
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
@@ -70,7 +72,7 @@ def agregar_fragmentos(textos, metadatos, ids):
         ids=ids
     )
 
-def buscar_similitud(consulta, top_k=3):
+def buscar_similitud(consulta, top_k=15):  # <-- CAMBIAMOS EL 3 POR UN 15
     """Busca los fragmentos mas parecidos semanticamente a la consulta."""
     query_embedding = model.encode([consulta]).tolist()
     resultados = collection.query(

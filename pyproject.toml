@@ -5,6 +5,7 @@ dependencies = [
     "mcp",
     "sentence-transformers",
     "chromadb",
+    "pip-system-certs>=5.3",
 ]
 
 [build-system]
