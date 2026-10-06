@@ -2,7 +2,7 @@
 name = "servidor-rag-sap"
 version = "0.1.0"
 dependencies = [
-    "mcp",
+    "mcp<2",
     "sentence-transformers",
     "chromadb",
     "pip-system-certs>=5.3",

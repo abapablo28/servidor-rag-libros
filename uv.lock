@@ -1871,7 +1871,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "chromadb" },
-    { name = "mcp" },
+    { name = "mcp", specifier = "<2" },
     { name = "pip-system-certs", specifier = ">=5.3" },
     { name = "sentence-transformers" },
 ]

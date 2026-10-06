@@ -3,7 +3,7 @@ from mcp.server.fastmcp import FastMCP
 from bd_config import buscar_similitud
 
 # 1. Inicializar el servidor MCP (Configurado para escuchar en cualquier IP)
-mcp = FastMCP("Servidor-RAG-SAP", host="0.0.0.0", port=8000, sse_path="/sse", message_path="/sse")
+mcp = FastMCP("Servidor-RAG-SAP", host="0.0.0.0", port=8000)
 
 # 2. Definir la herramienta de busqueda semantica (RAG)
 @mcp.tool()
@@ -57,6 +57,18 @@ if __name__ == "__main__":
     # Soporte dual: Si escribes --web arranca para internet, si no, arranca local
     if "--web" in sys.argv:
         print("Iniciando en Modo Web (HTTP/SSE) en el puerto 8000...", file=sys.stderr)
-        mcp.run(transport='sse')
+        import uvicorn
+        
+        # Obtenemos la app Starlette subyacente
+        app = mcp.sse_app()
+        
+        # Middleware ASGI para redirigir POST /sse hacia /messages/ (Arregla el bug de Antigravity)
+        async def asgi_wrapper(scope, receive, send):
+            if scope["type"] == "http" and scope["method"] == "POST" and scope["path"] == "/sse":
+                scope["path"] = "/messages/"
+            await app(scope, receive, send)
+            
+        print("Servidor RAG MCP iniciado con parche ASGI para Antigravity.", file=sys.stderr)
+        uvicorn.run(asgi_wrapper, host="0.0.0.0", port=8000)
     else:
         mcp.run()
