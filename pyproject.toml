@@ -6,6 +6,7 @@ dependencies = [
     "sentence-transformers",
     "chromadb",
     "pip-system-certs>=5.3",
+    "pypdf",
 ]
 
 [build-system]

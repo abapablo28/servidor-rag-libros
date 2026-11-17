@@ -1,0 +1,12 @@
+.venv
+venv
+__pycache__
+*.pyc
+.git
+.env
+uv.lock
+pdfs/
+*.crt
+node_modules
+query_result*.json
+# OJO: NO ignoramos base_vectores ni base_vectores.zip porque el servidor necesita la base de datos para responder.

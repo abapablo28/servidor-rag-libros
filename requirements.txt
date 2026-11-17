@@ -1,1 +1,7 @@
-X
+mcp<2
+sentence-transformers
+chromadb
+pip-system-certs>=5.3
+pypdf
+uvicorn
+starlette
