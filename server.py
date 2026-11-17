@@ -9,6 +9,7 @@ from bd_config import (
     obtener_catalogo_libros,
     obtener_coleccion,
     obtener_modelo,
+    resolver_nota_sap,
     _obtener_conexion_sqlite,
 )
 
@@ -35,7 +36,8 @@ REGLAS DE USO PARA RESPONDER CON ALTA CALIDAD Y VELOCIDAD:
 1. SIEMPRE que el usuario pida código ABAP, vistas CDS, RAP, optimización SQL HANA, migración a S/4HANA o tenga una consulta funcional (FI, MM, SD, EWM, BTP, etc.), consulta primero este MCP antes de responder de memoria.
 2. Muchos de los mejores libros técnicos de SAP Press están en INGLÉS y los manuales de academia están en ESPAÑOL. Por eso, al llamar a `consultar_conocimiento`, `consultar_abap_tecnico` o `consultar_proceso_funcional`, rellena SIEMPRE el parámetro `query_en` con la traducción técnica al inglés de la consulta.
 3. Para máxima rapidez, pide entre 3 y 5 resultados (`cantidad_resultados=4` por defecto). Si un fragmento devuelto muestra un código ABAP o una explicación paso a paso que continúa en el bloque siguiente, usa `leer_paginas_libro(fuente, bloque_inicio, bloque_fin)` para leer los bloques siguientes del mismo libro.
-4. En tu respuesta final al usuario, cita los manuales de SAP utilizados (nombre del PDF y bloques) y adapta el código o la explicación funcional fielmente a las buenas prácticas del libro.
+4. Si en un libro o en tu análisis encuentras citada una Nota SAP (ej. Note 2267308, Note 2568736, Note 1648480, etc.), usa la herramienta `consultar_nota_sap(numero_o_tema)` para obtener el resumen oficial, el impacto en arquitectura y el enlace directo me.sap.com/notes/<numero>.
+5. En tu respuesta final al usuario, cita los manuales de SAP utilizados (nombre del PDF y bloques) y adapta el código o la explicación funcional fielmente a las buenas prácticas del libro.
 """.strip()
 
 mcp = FastMCP(
@@ -232,6 +234,28 @@ def listar_libros_sap(categoria_o_filtro: Optional[str] = None) -> str:
         }, ensure_ascii=False)
     except Exception as e:
         return json.dumps({"error": f"Error al listar libros: {str(e)}"}, ensure_ascii=False)
+
+
+# ==============================================================================
+# 6. HERRAMIENTA PARA RESOLUCIÓN Y CONTEXTO DE NOTAS SAP CITADAS EN LIBROS
+# ==============================================================================
+@mcp.tool()
+def consultar_nota_sap(numero_o_tema: str, contexto_adicional: Optional[str] = None) -> str:
+    """
+    Localiza y explica una Nota SAP o Simplification Item citado en la biblioteca de manuales oficiales.
+    Extrae por qué los autores de SAP Press/Academia recomiendan esta nota, los cambios arquitectónicos
+    o de datos asociados (ej: CVI, ACDOCA, MATNR, ST03N, S4TWL) y genera el enlace oficial directo me.sap.com/notes/<numero>.
+    No requiere ninguna cuenta paga de SAP.
+
+    Args:
+        numero_o_tema: Número de la Nota SAP (ej. '2267308', '1648480', '2568736') o nombre del tema/reporte ('/SDF/RC_START', 'SD Pricing data model', 'CVI Business Partner').
+        contexto_adicional: (Opcional) Términos adicionales o pregunta específica sobre la nota.
+    """
+    try:
+        res = resolver_nota_sap(numero_o_tema=numero_o_tema, contexto_adicional=contexto_adicional)
+        return json.dumps(res, ensure_ascii=False)
+    except Exception as e:
+        return json.dumps({"error": f"Error al resolver Nota SAP: {str(e)}"}, ensure_ascii=False)
 
 
 # ==============================================================================

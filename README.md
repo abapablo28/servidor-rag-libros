@@ -36,6 +36,8 @@ Permite a clientes de IA como **Antigravity**, **Claude Desktop**, **Claude Web*
    * Permite a la IA "pasar la página" y leer rangos específicos de un manual cuando una explicación o código continúa.
 5. `listar_libros_sap(categoria_o_filtro=None)`:
    * Lista el catálogo depurado de manuales disponibles en caché instantánea (<2 ms).
+6. `consultar_nota_sap(numero_o_tema, contexto_adicional=None)`:
+   * Resuelve y contextualiza Notas SAP y Simplification Items citados en los libros de SAP Press/Academia, explicando su impacto en arquitectura y generando el enlace oficial directo `https://me.sap.com/notes/<numero>` (100% gratuito, sin requerir cuenta paga).
 
 ---
 

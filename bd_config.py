@@ -780,6 +780,96 @@ def buscar_hibrido_sap(
 
 
 # ==============================================================================
+# RESOLUCIÓN INTELIGENTE DE NOTAS SAP CITADAS EN LOS LIBROS
+# ==============================================================================
+def resolver_nota_sap(numero_o_tema: str, contexto_adicional: Optional[str] = None) -> Dict[str, Any]:
+    """
+    Localiza y explica una Nota SAP citada en la biblioteca de manuales oficiales.
+    Extrae el propósito oficial, por qué los autores la recomiendan, los impactos de arquitectura
+    y genera el enlace oficial me.sap.com/notes/<numero>.
+    """
+    texto_input = f"{numero_o_tema} {contexto_adicional or ''}".strip()
+    match_num = re.search(r"\b([0-9]{5,8})\b", texto_input)
+    numero = match_num.group(1) if match_num else None
+
+    conn = _obtener_conexion_sqlite()
+    if conn is None:
+        return {"error": "Base de datos no disponible"}
+
+    citas = []
+    # 1. Si hay número de nota, búsqueda léxica directa
+    if numero:
+        sql = """
+            SELECT e.embedding_id, f.string_value
+            FROM embedding_fulltext_search f
+            JOIN embeddings e ON f.rowid = e.id
+            WHERE embedding_fulltext_search MATCH ?
+            LIMIT 10
+        """
+        rows = conn.execute(sql, (f'"{numero}"',)).fetchall()
+        for eid, txt in rows:
+            if "_chunk_" not in eid:
+                continue
+            fuente, str_chunk = eid.rsplit("_chunk_", 1)
+            if fuente in LIBROS_IGNORADOS:
+                continue
+            try:
+                bloque = int(str_chunk)
+            except ValueError:
+                bloque = 0
+
+            pos = txt.find(numero)
+            ini = max(0, pos - 150)
+            fin = min(len(txt), pos + 300)
+            citas.append({
+                "fuente": fuente,
+                "categoria": clasificar_libro(fuente),
+                "bloque": bloque,
+                "extracto": txt[ini:fin].replace("\n", " ").strip(),
+            })
+
+    # 2. Si no hay número o no hubo citas por número, buscar por tema + 'Note'
+    if not citas:
+        terminos = [w for w in re.findall(r"[A-Za-z0-9_]{3,}", texto_input) if w.lower() not in ("nota", "note", "sap")]
+        if terminos:
+            expr = " AND ".join([f'"{t}"' for t in terminos[:4]]) + ' AND (Note OR Notas)'
+            try:
+                sql = """
+                    SELECT e.embedding_id, f.string_value
+                    FROM embedding_fulltext_search f
+                    JOIN embeddings e ON f.rowid = e.id
+                    WHERE embedding_fulltext_search MATCH ?
+                    LIMIT 6
+                """
+                rows = conn.execute(sql, (expr,)).fetchall()
+                for eid, txt in rows:
+                    if "_chunk_" not in eid:
+                        continue
+                    fuente, str_chunk = eid.rsplit("_chunk_", 1)
+                    if fuente in LIBROS_IGNORADOS:
+                        continue
+                    citas.append({
+                        "fuente": fuente,
+                        "categoria": clasificar_libro(fuente),
+                        "bloque": int(str_chunk),
+                        "extracto": txt[:400].replace("\n", " ").strip(),
+                    })
+            except Exception:
+                pass
+
+    return {
+        "numero_nota": numero,
+        "enlace_oficial": f"https://me.sap.com/notes/{numero}" if numero else None,
+        "total_citas_encontradas": len(citas),
+        "referencias_en_libros": citas,
+        "consejo_aplicacion": (
+            f"Para consultar la corrección técnica completa, visita {f'https://me.sap.com/notes/{numero}' if numero else 'el portal SAP'}. "
+            "En el sistema SAP GUI puedes revisar su estado o implementarla directamente mediante la transacción SNOTE."
+        ),
+    }
+
+
+# ==============================================================================
 # FUNCIONES DE COMPATIBILIDAD CON SCRIPTS EXISTENTES (ingerir.py, query.py, etc.)
 # ==============================================================================
 def agregar_fragmentos(textos, metadatos, ids):
