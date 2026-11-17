@@ -1,21 +1,23 @@
 [project]
 name = "servidor-rag-sap"
 version = "0.1.0"
+requires-python = ">=3.10"
 dependencies = [
     "mcp<2",
     "sentence-transformers",
     "chromadb",
     "pip-system-certs>=5.3",
     "pypdf",
+    "uvicorn",
+    "starlette",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-# --- ESTO ES LO QUE ARREGLA EL ERROR ---
 [tool.hatch.build.targets.wheel]
-packages = ["."] 
+only-include = ["server.py", "bd_config.py", "ingerir.py", "listar_libros.py", "query.py"]
 
 [project.scripts]
 servidor-rag-sap = "server:mcp.run"

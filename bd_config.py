@@ -244,6 +244,10 @@ def asegurar_base_datos():
                 os.remove(ZIP_PATH)
 
 
+import threading
+_init_lock = threading.Lock()
+
+
 def obtener_modelo():
     """
     Carga el motor de embeddings ONNX ultraligero (all-MiniLM-L6-v2 en ONNXRuntime).
@@ -251,30 +255,34 @@ def obtener_modelo():
     """
     global _model
     if _model is None:
-        try:
-            from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2
-            _onnx_ef = ONNXMiniLM_L6_V2()
+        with _init_lock:
+            if _model is None:
+                try:
+                    from chromadb.utils.embedding_functions import ONNXMiniLM_L6_V2
+                    _onnx_ef = ONNXMiniLM_L6_V2()
 
-            class _ONNXWrapper:
-                def encode(self, textos: List[str]):
-                    vecs = _onnx_ef(list(textos))
-                    return [v.tolist() if hasattr(v, "tolist") else list(v) for v in vecs]
+                    class _ONNXWrapper:
+                        def encode(self, textos: List[str]):
+                            vecs = _onnx_ef(list(textos))
+                            return [v.tolist() if hasattr(v, "tolist") else list(v) for v in vecs]
 
-            _model = _ONNXWrapper()
-        except Exception:
-            from sentence_transformers import SentenceTransformer
-            model_name = os.environ.get("SAP_RAG_EMBEDDING_MODEL", "all-MiniLM-L6-v2")
-            _model = SentenceTransformer(model_name, local_files_only=True)
+                    _model = _ONNXWrapper()
+                except Exception:
+                    from sentence_transformers import SentenceTransformer
+                    model_name = os.environ.get("SAP_RAG_EMBEDDING_MODEL", "all-MiniLM-L6-v2")
+                    _model = SentenceTransformer(model_name, local_files_only=True)
     return _model
 
 
 def obtener_coleccion():
-    """Conecta a ChromaDB bajo demanda (Singleton)."""
+    """Conecta a ChromaDB bajo demanda de forma thread-safe (Singleton)."""
     global _chroma_client, _collection
     if _collection is None:
-        asegurar_base_datos()
-        _chroma_client = chromadb.PersistentClient(path=DB_PATH)
-        _collection = _chroma_client.get_or_create_collection(name="conocimiento_sap")
+        with _init_lock:
+            if _collection is None:
+                asegurar_base_datos()
+                _chroma_client = chromadb.PersistentClient(path=DB_PATH)
+                _collection = _chroma_client.get_or_create_collection(name="conocimiento_sap")
     return _collection
 
 
