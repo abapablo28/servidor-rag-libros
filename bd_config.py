@@ -315,13 +315,26 @@ _sqlite_conn = None
 
 
 def _obtener_conexion_sqlite() -> Optional[sqlite3.Connection]:
-    """Abre y reutiliza una conexión permanente de solo lectura a chroma.sqlite3."""
+    """Abre y reutiliza una conexión permanente de solo lectura a chroma.sqlite3 blindada contra bloqueos de OneDrive."""
     global _sqlite_conn
     if _sqlite_conn is None:
-        asegurar_base_datos()
-        if not os.path.exists(SQLITE_PATH):
-            return None
-        _sqlite_conn = sqlite3.connect(f"file:{SQLITE_PATH}?mode=ro", uri=True, check_same_thread=False)
+        with _init_lock:
+            if _sqlite_conn is None:
+                asegurar_base_datos()
+                if not os.path.exists(SQLITE_PATH):
+                    return None
+                _sqlite_conn = sqlite3.connect(
+                    f"file:{SQLITE_PATH}?mode=ro",
+                    uri=True,
+                    check_same_thread=False,
+                    timeout=30.0,
+                )
+                try:
+                    _sqlite_conn.execute("PRAGMA busy_timeout = 30000;")
+                    _sqlite_conn.execute("PRAGMA query_only = ON;")
+                    _sqlite_conn.execute("PRAGMA cache_size = -64000;")
+                except Exception:
+                    pass
     return _sqlite_conn
 
 
@@ -630,7 +643,6 @@ def buscar_hibrido_sap(
     top_k = max(1, min(int(top_k), 15))
     info_query = expandir_consulta_sap(pregunta, query_en=query_en, modulo=modulo)
     catalogo = obtener_catalogo_libros()
-    coleccion = obtener_coleccion()
 
     filtro_norm = _normalizar_para_match(libro_filtro) if libro_filtro else None
     libros_dominio = set()
@@ -641,9 +653,6 @@ def buscar_hibrido_sap(
         libros_dominio = {b["fuente"] for b in catalogo if b["categoria"] in cats}
         if "HR_HCM" not in cats:
             libros_dominio = {f for f in libros_dominio if not f.lower().startswith("unidad")}
-
-    emb_es = _codificar_consulta(pregunta)
-    emb_en = _codificar_consulta(info_query["consulta_en"]) if info_query["consulta_en"] != pregunta else emb_es
 
     candidatos: Dict[Tuple[str, int], Dict[str, Any]] = {}
 
@@ -656,7 +665,7 @@ def buscar_hibrido_sap(
             return
         if fuente.lower().startswith("unidad") and "HR_HCM" not in info_query["categorias"] and not filtro_norm:
             return
-        if filtro_norm and filtro_norm not in _normalizar_para_match(fuente):
+        if filtro_norm and filtro_norm not in _normalizar_para_match(fuente) and filtro_norm not in _normalizar_para_match(obtener_titulo_limpio_libro(fuente)):
             return
         clave = (fuente, bloque)
         # Bonificar fuertemente si el libro pertenece al módulo explícito o categoría detectada
@@ -683,29 +692,38 @@ def buscar_hibrido_sap(
     for rank, (fuente, bloque, texto, _bm25) in enumerate(fts_hits):
         _registrar_candidato(fuente, bloque, texto, rank, peso=1.50, origen="fts_bm25")
 
-    # --- B. Búsqueda Vectorial HNSW Bilingüe (1 sola llamada en memoria, ~25ms) ---
-    try:
-        where_unico = {"fuente": list(libros_dominio)[0]} if len(libros_dominio) == 1 else None
-        res_vec = coleccion.query(
-            query_embeddings=[emb_en, emb_es],
-            n_results=35,
-            where=where_unico,
-        )
-        for idx_q, etiqueta in enumerate(["vec_en", "vec_es"]):
-            docs = res_vec.get("documents", [[]])[idx_q] if res_vec.get("documents") else []
-            metas = res_vec.get("metadatas", [[]])[idx_q] if res_vec.get("metadatas") else []
-            for rank, (doc, meta) in enumerate(zip(docs, metas)):
-                if doc and meta:
-                    _registrar_candidato(
-                        meta.get("fuente", ""),
-                        int(meta.get("bloque", 0)),
-                        doc,
-                        rank,
-                        peso=1.15 if idx_q == 0 else 1.0,
-                        origen=etiqueta,
-                    )
-    except Exception:
-        pass
+    # --- B. Búsqueda Vectorial HNSW Bilingüe con Auto-Recuperación (1 sola llamada en memoria, ~25ms) ---
+    for _intento in range(2):
+        try:
+            coleccion = obtener_coleccion()
+            emb_es = _codificar_consulta(pregunta)
+            emb_en = _codificar_consulta(info_query["consulta_en"]) if info_query["consulta_en"] != pregunta else emb_es
+            where_unico = {"fuente": list(libros_dominio)[0]} if len(libros_dominio) == 1 else None
+            res_vec = coleccion.query(
+                query_embeddings=[emb_en, emb_es],
+                n_results=35,
+                where=where_unico,
+            )
+            for idx_q, etiqueta in enumerate(["vec_en", "vec_es"]):
+                docs = res_vec.get("documents", [[]])[idx_q] if res_vec.get("documents") else []
+                metas = res_vec.get("metadatas", [[]])[idx_q] if res_vec.get("metadatas") else []
+                for rank, (doc, meta) in enumerate(zip(docs, metas)):
+                    if doc and meta:
+                        _registrar_candidato(
+                            meta.get("fuente", ""),
+                            int(meta.get("bloque", 0)),
+                            doc,
+                            rank,
+                            peso=1.15 if idx_q == 0 else 1.0,
+                            origen=etiqueta,
+                        )
+            break
+        except Exception:
+            global _chroma_client, _collection
+            with _init_lock:
+                _chroma_client = None
+                _collection = None
+            continue
 
     # --- C. Re-scoring por coincidencia de keywords en texto y título del libro ---
     todas_kw_norm = [
