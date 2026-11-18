@@ -17,7 +17,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-only-include = ["server.py", "bd_config.py", "ingerir.py", "listar_libros.py", "query.py"]
+only-include = ["server.py", "bd_config.py", "ingerir.py", "listar_libros.py", "query.py", "clean_core_catalog.json.gz", "titulos_libros_sap.json"]
 
 [project.scripts]
 servidor-rag-sap = "server:mcp.run"

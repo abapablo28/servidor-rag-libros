@@ -1,0 +1,1290 @@
+{
+  "103446420-sap-fi-mm-sd-integration.pdf": {
+    "archivo_pdf": "103446420-sap-fi-mm-sd-integration.pdf",
+    "titulo_limpio": "[Manual Especializado] Integración FI - MM - SD en SAP ERP (SAPTopJobs)",
+    "categoria": "FI_CO",
+    "idioma": "EN",
+    "total_bloques": 26
+  },
+  "20161214LocalizationSummit_eDocuments.pdf": {
+    "archivo_pdf": "20161214LocalizationSummit_eDocuments.pdf",
+    "titulo_limpio": "[SAP España] eDocument Framework - Solución de Factura Electrónica",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 20
+  },
+  "2455-whats-new-in-c-cpi-15.pdf": {
+    "archivo_pdf": "2455-whats-new-in-c-cpi-15.pdf",
+    "titulo_limpio": "[SAP Press] What's New in C_CPI_15 (SAP Integration Suite Exam Guide)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 72
+  },
+  "ABAP Cloud - Object-Oriented Programming - Logali Tech - Gheorghe Valer.pdf": {
+    "archivo_pdf": "ABAP Cloud - Object-Oriented Programming - Logali Tech - Gheorghe Valer.pdf",
+    "titulo_limpio": "[Logali Tech] ABAP Cloud - Object-Oriented Programming (Gheorghe Valer)",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 288
+  },
+  "ABAP Cookbook.pdf": {
+    "archivo_pdf": "ABAP Cookbook.pdf",
+    "titulo_limpio": "[SAP Press] ABAP Cookbook: Programming Recipes for Everyday Solutions",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 1112
+  },
+  "ABAP Development for SAP Business Workflow (2011).pdf": {
+    "archivo_pdf": "ABAP Development for SAP Business Workflow (2011).pdf",
+    "titulo_limpio": "[SAP Press] ABAP Development for SAP Business Workflow",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 440
+  },
+  "ABAP Performance Tuning (2009).pdf": {
+    "archivo_pdf": "ABAP Performance Tuning (2009).pdf",
+    "titulo_limpio": "[SAP Press] ABAP Performance Tuning: Strategies and Techniques",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 1112
+  },
+  "ABAP Programming Model for SAP Fiori - ABAP Development for SAP S4HANA (2019).pdf": {
+    "archivo_pdf": "ABAP Programming Model for SAP Fiori - ABAP Development for SAP S4HANA (2019).pdf",
+    "titulo_limpio": "[SAP Press] ABAP Programming Model for SAP Fiori: ABAP Development for S/4HANA (2019)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1297
+  },
+  "ABAP RESTful Application Programming Model (2025).pdf": {
+    "archivo_pdf": "ABAP RESTful Application Programming Model (2025).pdf",
+    "titulo_limpio": "[SAP Press] ABAP RESTful Application Programming Model (RAP) (2025)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1677
+  },
+  "ABAP RESTful Programming Model - ABAP Development for SAP S4HANA (2020).pdf": {
+    "archivo_pdf": "ABAP RESTful Programming Model - ABAP Development for SAP S4HANA (2020).pdf",
+    "titulo_limpio": "[SAP Press] ABAP RESTful Programming Model (RAP) for SAP S/4HANA (2020)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1599
+  },
+  "ABAP in the Cloud - Development and Operations with SAP BTP, ABAP Environment (2021).pdf": {
+    "archivo_pdf": "ABAP in the Cloud - Development and Operations with SAP BTP, ABAP Environment (2021).pdf",
+    "titulo_limpio": "[SAP Press] ABAP in the Cloud: Development & Operations with SAP BTP (2021)",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 948
+  },
+  "ABAP-RESTful-Application-Programming-Model (2023).pdf": {
+    "archivo_pdf": "ABAP-RESTful-Application-Programming-Model (2023).pdf",
+    "titulo_limpio": "[SAP Press] ABAP RESTful Application Programming Model (RAP) (2023)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1264
+  },
+  "ASAP.pdf": {
+    "archivo_pdf": "ASAP.pdf",
+    "titulo_limpio": "[Metodología SAP] Accelerated SAP (ASAP) Roadmap & Implementation Guide",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 564
+  },
+  "Administration_Guide_SAP_Electronic_Invo (2).pdf": {
+    "archivo_pdf": "Administration_Guide_SAP_Electronic_Invo (2).pdf",
+    "titulo_limpio": "[Guía Oficial SAP] Guía de Administración - Factura Electrónica eDocument",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 1329
+  },
+  "Application Development with SAP Analytics Cloud.pdf": {
+    "archivo_pdf": "Application Development with SAP Analytics Cloud.pdf",
+    "titulo_limpio": "[SAP Press] Application Development with SAP Analytics Cloud",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 672
+  },
+  "Application Development with SAP Business Technology - 2023 - SAP Press.pdf": {
+    "archivo_pdf": "Application Development with SAP Business Technology - 2023 - SAP Press.pdf",
+    "titulo_limpio": "[SAP Press] Application Development with SAP Business Technology Platform (BTP 2023)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 1408
+  },
+  "Authorization Objects in CDS Access Control.pdf": {
+    "archivo_pdf": "Authorization Objects in CDS Access Control.pdf",
+    "titulo_limpio": "[Guía Técnica SAP] Authorization Objects in CDS Access Control (DCL)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 5
+  },
+  "Automated Testing and Test-Driven Development for SAP Integration Suite Migration.pdf": {
+    "archivo_pdf": "Automated Testing and Test-Driven Development for SAP Integration Suite Migration.pdf",
+    "titulo_limpio": "[SAP Press] Automated Testing and TDD for SAP Integration Suite Migration",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 290
+  },
+  "BC425 en-col10-enhancement-modifications.pdf": {
+    "archivo_pdf": "BC425 en-col10-enhancement-modifications.pdf",
+    "titulo_limpio": "[Academia SAP] BC425 - Enhancements and Modifications (Ampliaciones, BAdIs y Exits)",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 396
+  },
+  "Best Practices for SAP BTP_3e05933c-dda1-469f-ac24-69715c92f9c9.pdf": {
+    "archivo_pdf": "Best Practices for SAP BTP_3e05933c-dda1-469f-ac24-69715c92f9c9.pdf",
+    "titulo_limpio": "[SAP Press] Best Practices for SAP Business Technology Platform (BTP)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 288
+  },
+  "CLD200_EN_Col21_v2.pdf": {
+    "archivo_pdf": "CLD200_EN_Col21_v2.pdf",
+    "titulo_limpio": "[Academia SAP] CLD200 - SAP BTP Architecture, Development and Operations",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 175
+  },
+  "Chapter_33__IS-OIL_Industry_Solution_OilE_(2).PDF": {
+    "archivo_pdf": "Chapter_33__IS-OIL_Industry_Solution_OilE_(2).PDF",
+    "titulo_limpio": "[Notas SAP] IS-OIL Industry Solution Oil (ERP 6.0 Release Notes)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 57
+  },
+  "Clean SAPUI5.pdf": {
+    "archivo_pdf": "Clean SAPUI5.pdf",
+    "titulo_limpio": "[SAP Press] Clean SAPUI5: Architecture and Code Style Guide",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1669
+  },
+  "Cloud Connector for SAP.pdf": {
+    "archivo_pdf": "Cloud Connector for SAP.pdf",
+    "titulo_limpio": "[SAP Press] Cloud Connector for SAP: Configuration and Architecture",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 679
+  },
+  "Cloud Integration with SAP Integration Suite.pdf": {
+    "archivo_pdf": "Cloud Integration with SAP Integration Suite.pdf",
+    "titulo_limpio": "[SAP Press] Cloud Integration with SAP Integration Suite (CPI)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 2537
+  },
+  "Configuring SAP Business Technology Platform.pdf": {
+    "archivo_pdf": "Configuring SAP Business Technology Platform.pdf",
+    "titulo_limpio": "[SAP Press] Configuring SAP Business Technology Platform (BTP)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 808
+  },
+  "Core Data Services for ABAP (2019).pdf": {
+    "archivo_pdf": "Core Data Services for ABAP (2019).pdf",
+    "titulo_limpio": "[SAP Press] Core Data Services for ABAP (CDS) (Edición 2019)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1406
+  },
+  "Core Data Services for ABAP (2024).pdf": {
+    "archivo_pdf": "Core Data Services for ABAP (2024).pdf",
+    "titulo_limpio": "[SAP Press] Core Data Services for ABAP (CDS) (Edición 2024)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 2147
+  },
+  "Creating an SAP Workflow with Workflow Builder (2015).pdf": {
+    "archivo_pdf": "Creating an SAP Workflow with Workflow Builder (2015).pdf",
+    "titulo_limpio": "[SAP Press] Creating an SAP Workflow with Workflow Builder",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "EN",
+    "total_bloques": 117
+  },
+  "Customizing-Documentation-for-eDocument-pdf.pdf": {
+    "archivo_pdf": "Customizing-Documentation-for-eDocument-pdf.pdf",
+    "titulo_limpio": "[Guía Técnica SAP] Customizing and Configuration Guide for SAP eDocument",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 37
+  },
+  "Design Patterns in Object-Oriented ABAP __ Copy wmeh-fy5u-c7tj-2as8.pdf": {
+    "archivo_pdf": "Design Patterns in Object-Oriented ABAP __ Copy wmeh-fy5u-c7tj-2as8.pdf",
+    "titulo_limpio": "[SAP Press] Design Patterns in Object-Oriented ABAP",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 848
+  },
+  "Developing Applications with the SAP Cloud Application Programming Model.pdf": {
+    "archivo_pdf": "Developing Applications with the SAP Cloud Application Programming Model.pdf",
+    "titulo_limpio": "[SAP Press] Developing Applications with SAP Cloud Application Programming Model (CAP)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 207
+  },
+  "Developing Apps with SAP Build Code and Generative AI.pdf": {
+    "archivo_pdf": "Developing Apps with SAP Build Code and Generative AI.pdf",
+    "titulo_limpio": "[SAP Press] Developing Apps with SAP Build Code and Generative AI",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 248
+  },
+  "Developing Event-Driven Integrations with SAP BTP.pdf": {
+    "archivo_pdf": "Developing Event-Driven Integrations with SAP BTP.pdf",
+    "titulo_limpio": "[SAP Press] Developing Event-Driven Integrations with SAP BTP",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 345
+  },
+  "EHP4_for_SAP_ERP_6.0_Contabilidad_de_Act.pdf": {
+    "archivo_pdf": "EHP4_for_SAP_ERP_6.0_Contabilidad_de_Act.pdf",
+    "titulo_limpio": "[SAP Best Practices] Contabilidad de Activos Fijos FI-AA (ERP 6.0 EHP4)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "ES",
+    "total_bloques": 188
+  },
+  "EWM Press Book.pdf": {
+    "archivo_pdf": "EWM Press Book.pdf",
+    "titulo_limpio": "[SAP Press] Extended Warehouse Management (EWM) with SAP S/4HANA",
+    "categoria": "MM_EWM",
+    "idioma": "EN",
+    "total_bloques": 2189
+  },
+  "EWM with SAP S4HANA - Architecture and Programming.pdf": {
+    "archivo_pdf": "EWM with SAP S4HANA - Architecture and Programming.pdf",
+    "titulo_limpio": "[SAP Press] EWM with SAP S/4HANA: Architecture and Programming",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 1639
+  },
+  "F920-Manual-de-LSMW.pdf": {
+    "archivo_pdf": "F920-Manual-de-LSMW.pdf",
+    "titulo_limpio": "[Manual Especializado] Manual de Migración de Datos con LSMW",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "ES",
+    "total_bloques": 29
+  },
+  "FI_Financial_Accounting.pdf": {
+    "archivo_pdf": "FI_Financial_Accounting.pdf",
+    "titulo_limpio": "[Manual SAP] SAP ERP Financial Accounting (FI Core Overview)",
+    "categoria": "FI_CO",
+    "idioma": "EN",
+    "total_bloques": 432
+  },
+  "Form - Manual Smartforms.pdf": {
+    "archivo_pdf": "Form - Manual Smartforms.pdf",
+    "titulo_limpio": "[Manual Especializado] Manual de Diseño de Formularios SmartForms",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "ES",
+    "total_bloques": 27
+  },
+  "Full Stack Development with SAP.pdf": {
+    "archivo_pdf": "Full Stack Development with SAP.pdf",
+    "titulo_limpio": "[SAP Press] Full Stack Development with SAP",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 1543
+  },
+  "Generando un XML vía CALL Transformation.pdf": {
+    "archivo_pdf": "Generando un XML vía CALL Transformation.pdf",
+    "titulo_limpio": "[Guía Técnica ABAP] Generación de XML vía CALL TRANSFORMATION",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 11
+  },
+  "HA100 (SAP HANA 2.0 SPS04 - V16) EN.pdf": {
+    "archivo_pdf": "HA100 (SAP HANA 2.0 SPS04 - V16) EN.pdf",
+    "titulo_limpio": "[Academia SAP] HA100 - SAP HANA 2.0 Introduction (English)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 430
+  },
+  "HA100 (SAP HANA 2.0 SPS04 - V16) ES.pdf": {
+    "archivo_pdf": "HA100 (SAP HANA 2.0 SPS04 - V16) ES.pdf",
+    "titulo_limpio": "[Academia SAP] HA100 - Introducción a SAP HANA 2.0 (Español)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 504
+  },
+  "HA300 (SAP HANA 2.0 SPS04 - V16) EN.pdf": {
+    "archivo_pdf": "HA300 (SAP HANA 2.0 SPS04 - V16) EN.pdf",
+    "titulo_limpio": "[Academia SAP] HA300 - SAP HANA Modeling & Calculation Views (English)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 773
+  },
+  "HA300 (SAP HANA 2.0 SPS04 - V16) ES.pdf": {
+    "archivo_pdf": "HA300 (SAP HANA 2.0 SPS04 - V16) ES.pdf",
+    "titulo_limpio": "[Academia SAP] HA300 - Modelado de Datos y Vistas de Cálculo en HANA (Español)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 871
+  },
+  "HA400 (SAP HANA 2.0 SPS02 - V16) EN.pdf": {
+    "archivo_pdf": "HA400 (SAP HANA 2.0 SPS02 - V16) EN.pdf",
+    "titulo_limpio": "[Academia SAP] HA400 - ABAP Programming for SAP HANA (English)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 360
+  },
+  "HA400 (SAP HANA 2.0 SPS02 - V16) ES.pdf": {
+    "archivo_pdf": "HA400 (SAP HANA 2.0 SPS02 - V16) ES.pdf",
+    "titulo_limpio": "[Academia SAP] HA400 - Desarrollo ABAP para SAP HANA (Español)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 401
+  },
+  "HA400_EN_Col18.pdf": {
+    "archivo_pdf": "HA400_EN_Col18.pdf",
+    "titulo_limpio": "[Academia SAP] HA400 - ABAP Development for SAP HANA (Col18)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 334
+  },
+  "How to Install and Configure External Drivers for JDBC JMS (NW2004).pdf": {
+    "archivo_pdf": "How to Install and Configure External Drivers for JDBC JMS (NW2004).pdf",
+    "titulo_limpio": "[Guía Técnica SAP] How to Configure External Drivers for JDBC/JMS (NetWeaver)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 37
+  },
+  "How_to_setup_My_Inbox_2.0 1.pdf": {
+    "archivo_pdf": "How_to_setup_My_Inbox_2.0 1.pdf",
+    "titulo_limpio": "[Guía Fiori] How to Setup and Configure SAP Fiori My Inbox 2.0",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "EN",
+    "total_bloques": 63
+  },
+  "IUT110_EN_Col97_FV_Part_A4.pdf": {
+    "archivo_pdf": "IUT110_EN_Col97_FV_Part_A4.pdf",
+    "titulo_limpio": "[Academia SAP] IUT110 - SAP for Utilities Introduction (English)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 619
+  },
+  "IUT210-Master Data and Basic Functions.pdf": {
+    "archivo_pdf": "IUT210-Master Data and Basic Functions.pdf",
+    "titulo_limpio": "[Academia SAP] IUT210 - Master Data and Basic Functions in SAP IS-U",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 559
+  },
+  "IUT220_EN_Col97_FV_A4.pdf": {
+    "archivo_pdf": "IUT220_EN_Col97_FV_A4.pdf",
+    "titulo_limpio": "[Academia SAP] IUT220 - Facturación y Tarifas en SAP IS-U Billing (English)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 366
+  },
+  "IUT230_EN_Col97_FV_A4.pdf": {
+    "archivo_pdf": "IUT230_EN_Col97_FV_A4.pdf",
+    "titulo_limpio": "[Academia SAP] IUT230 - Device Management en SAP IS-U (English)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 777
+  },
+  "IUT240_EN_Col97_FV_Part_A4.pdf": {
+    "archivo_pdf": "IUT240_EN_Col97_FV_Part_A4.pdf",
+    "titulo_limpio": "[Academia SAP] IUT240 - Contabilidad de Clientes en Utilities FI-CA (English)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 836
+  },
+  "Implementing SAP Code Vulnerability Analyzer in SAP BTP.pdf": {
+    "archivo_pdf": "Implementing SAP Code Vulnerability Analyzer in SAP BTP.pdf",
+    "titulo_limpio": "[SAP Press] Implementing SAP Code Vulnerability Analyzer (CVA) in BTP",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 204
+  },
+  "Installation-Guide-for-eDocument.pdf": {
+    "archivo_pdf": "Installation-Guide-for-eDocument.pdf",
+    "titulo_limpio": "[Guía Oficial SAP] Installation Guide for SAP eDocument Framework",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 52
+  },
+  "Introducción ABAP On- Hana - Práctica SAP.pdf": {
+    "archivo_pdf": "Introducción ABAP On- Hana - Práctica SAP.pdf",
+    "titulo_limpio": "[Manual Práctico] Introducción a ABAP on HANA: Prácticas y Ejercicios",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 12
+  },
+  "Introducing SAP Datasphere.pdf": {
+    "archivo_pdf": "Introducing SAP Datasphere.pdf",
+    "titulo_limpio": "[SAP Press] Introducing SAP Datasphere (Data Warehouse Cloud)",
+    "categoria": "BW_ANALYTICS",
+    "idioma": "EN",
+    "total_bloques": 315
+  },
+  "JavaScript Essentials for SAP ABAP Developers.pdf": {
+    "archivo_pdf": "JavaScript Essentials for SAP ABAP Developers.pdf",
+    "titulo_limpio": "[SAP Press] JavaScript Essentials for SAP ABAP Developers",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 402
+  },
+  "Lsmw-Manual.pdf": {
+    "archivo_pdf": "Lsmw-Manual.pdf",
+    "titulo_limpio": "[Manual Especializado] Manual Práctico de Carga Masiva con LSMW",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "ES",
+    "total_bloques": 28
+  },
+  "Manual-Workflow.pdf": {
+    "archivo_pdf": "Manual-Workflow.pdf",
+    "titulo_limpio": "[Manual Especializado] Manual de Parametrización y Flujos SAP Workflow",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "ES",
+    "total_bloques": 118
+  },
+  "Manual_Lectura_Textos_CDS.pdf": {
+    "archivo_pdf": "Manual_Lectura_Textos_CDS.pdf",
+    "titulo_limpio": "[Guía Técnica CDS] Manual de Lectura de Textos Maestros en Vistas CDS",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "ES",
+    "total_bloques": 6
+  },
+  "Manual_de_usuario_de_SAP_Lumira_Contenid.pdf": {
+    "archivo_pdf": "Manual_de_usuario_de_SAP_Lumira_Contenid.pdf",
+    "titulo_limpio": "[Manual Oficial SAP] Manual de Usuario: SAP Lumira",
+    "categoria": "BW_ANALYTICS",
+    "idioma": "ES",
+    "total_bloques": 506
+  },
+  "Manual_del_usuario_de_InfoView_de_SAP_Bu.pdf": {
+    "archivo_pdf": "Manual_del_usuario_de_InfoView_de_SAP_Bu.pdf",
+    "titulo_limpio": "[Manual Oficial SAP] Manual de Usuario: InfoView SAP BusinessObjects",
+    "categoria": "BW_ANALYTICS",
+    "idioma": "ES",
+    "total_bloques": 521
+  },
+  "Manual_del_usuario_de_SAP_BusinessObject.pdf": {
+    "archivo_pdf": "Manual_del_usuario_de_SAP_BusinessObject.pdf",
+    "titulo_limpio": "[Manual Oficial SAP] Manual de Usuario: Plataforma SAP BusinessObjects",
+    "categoria": "BW_ANALYTICS",
+    "idioma": "ES",
+    "total_bloques": 1782
+  },
+  "Memoria.pdf": {
+    "archivo_pdf": "Memoria.pdf",
+    "titulo_limpio": "[Caso de Estudio] Implantación de SAP ERP en Distribuidora (Proyecto TFC)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "ES",
+    "total_bloques": 124
+  },
+  "Migrating Your Custom Code to SAP S4HANA.pdf": {
+    "archivo_pdf": "Migrating Your Custom Code to SAP S4HANA.pdf",
+    "titulo_limpio": "[SAP Press] Migrating Your Custom Code to SAP S/4HANA (Custom Code Migration)",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 279
+  },
+  "Migrating to SAP S_4HANA.pdf": {
+    "archivo_pdf": "Migrating to SAP S_4HANA.pdf",
+    "titulo_limpio": "[SAP Press] Migrating to SAP S/4HANA: Operating Models and System Conversion",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 1847
+  },
+  "Object-Oriented Programming with ABAP Objects (Second Edition).pdf": {
+    "archivo_pdf": "Object-Oriented Programming with ABAP Objects (Second Edition).pdf",
+    "titulo_limpio": "[SAP Press] Object-Oriented Programming with ABAP Objects (2nd Edition)",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 1183
+  },
+  "Personal SD Study Guide.pdf": {
+    "archivo_pdf": "Personal SD Study Guide.pdf",
+    "titulo_limpio": "[Guía de Estudio] Personal Study Guide: SAP Sales and Distribution (SD)",
+    "categoria": "SD",
+    "idioma": "EN",
+    "total_bloques": 83
+  },
+  "PlanViz- Improving SAP HANA Performance.pdf": {
+    "archivo_pdf": "PlanViz- Improving SAP HANA Performance.pdf",
+    "titulo_limpio": "[Guía Técnica HANA] PlanViz: Improving SAP HANA SQL Performance",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 109
+  },
+  "Preparing Your SAP ERP System for an SAP S4HANA Migration.pdf": {
+    "archivo_pdf": "Preparing Your SAP ERP System for an SAP S4HANA Migration.pdf",
+    "titulo_limpio": "[SAP Press] Preparing Your SAP ERP System for SAP S/4HANA Migration",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 127
+  },
+  "S4F12.26.ES-ES.pdf": {
+    "archivo_pdf": "S4F12.26.ES-ES.pdf",
+    "titulo_limpio": "[Academia SAP] S4F12 - Contabilidad Financiera en SAP S/4HANA I (Español)",
+    "categoria": "FI_CO",
+    "idioma": "ES",
+    "total_bloques": 777
+  },
+  "S4F13.26.ES-ES.pdf": {
+    "archivo_pdf": "S4F13.26.ES-ES.pdf",
+    "titulo_limpio": "[Academia SAP] S4F13 - Contabilidad Financiera en SAP S/4HANA II (Español)",
+    "categoria": "FI_CO",
+    "idioma": "ES",
+    "total_bloques": 1003
+  },
+  "S4F15.26.ES-ES.pdf": {
+    "archivo_pdf": "S4F15.26.ES-ES.pdf",
+    "titulo_limpio": "[Academia SAP] S4F15 - Contabilidad de Activos Fijos en SAP S/4HANA (Español)",
+    "categoria": "FI_CO",
+    "idioma": "ES",
+    "total_bloques": 871
+  },
+  "S4F17.26.ES-ES.pdf": {
+    "archivo_pdf": "S4F17.26.ES-ES.pdf",
+    "titulo_limpio": "[Academia SAP] S4F17 - Cierre Contable y Balances en SAP S/4HANA (Español)",
+    "categoria": "FI_CO",
+    "idioma": "ES",
+    "total_bloques": 924
+  },
+  "SAP API Management.pdf": {
+    "archivo_pdf": "SAP API Management.pdf",
+    "titulo_limpio": "[SAP Press] SAP API Management: Architecture and Governance",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 785
+  },
+  "SAP Activate Project Management for SAP S4HANA.pdf": {
+    "archivo_pdf": "SAP Activate Project Management for SAP S4HANA.pdf",
+    "titulo_limpio": "[SAP Press] SAP Activate Project Management for SAP S/4HANA",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 2007
+  },
+  "SAP Activate Project Management.pdf": {
+    "archivo_pdf": "SAP Activate Project Management.pdf",
+    "titulo_limpio": "[SAP Press] SAP Activate Project Management: Certified Associate Exam Guide",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 1771
+  },
+  "SAP Analytics Cloud Performance Optimization Guide.pdf": {
+    "archivo_pdf": "SAP Analytics Cloud Performance Optimization Guide.pdf",
+    "titulo_limpio": "[SAP Press] SAP Analytics Cloud: Performance Optimization Guide",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 1084
+  },
+  "SAP Best Practices ABAP HR HCM.pdf": {
+    "archivo_pdf": "SAP Best Practices ABAP HR HCM.pdf",
+    "titulo_limpio": "[SAP Best Practices] Guía de Desarrollo ABAP para Recursos Humanos (HR / HCM)",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 439
+  },
+  "SAP Build No Code Development Centralized Access and Process Automation.pdf": {
+    "archivo_pdf": "SAP Build No Code Development Centralized Access and Process Automation.pdf",
+    "titulo_limpio": "[SAP Press] SAP Build: No-Code Development and Process Automation",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 1525
+  },
+  "SAP Build Process Automation.pdf": {
+    "archivo_pdf": "SAP Build Process Automation.pdf",
+    "titulo_limpio": "[SAP Press] SAP Build Process Automation: Architecture and Extension",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 1608
+  },
+  "SAP Business Technology Platform.pdf": {
+    "archivo_pdf": "SAP Business Technology Platform.pdf",
+    "titulo_limpio": "[SAP Press] SAP Business Technology Platform: An Introduction",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 2409
+  },
+  "SAP CIN SD Configuration Guide (Only for Learning).pdf": {
+    "archivo_pdf": "SAP CIN SD Configuration Guide (Only for Learning).pdf",
+    "titulo_limpio": "[Guía Técnica SD] SAP Country India Version (CIN) SD Configuration Guide",
+    "categoria": "SD",
+    "idioma": "EN",
+    "total_bloques": 724
+  },
+  "SAP Cloud ALM Application Lifecycle Management __ Copy nt5q-a9eb-hwm3-f4gp.pdf": {
+    "archivo_pdf": "SAP Cloud ALM Application Lifecycle Management __ Copy nt5q-a9eb-hwm3-f4gp.pdf",
+    "titulo_limpio": "[SAP Press] SAP Cloud ALM: Application Lifecycle Management",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 1609
+  },
+  "SAP Cloud Platform Integration - The Comprehensive Guide (2018).pdf": {
+    "archivo_pdf": "SAP Cloud Platform Integration - The Comprehensive Guide (2018).pdf",
+    "titulo_limpio": "[SAP Press] SAP Cloud Platform Integration (CPI): The Comprehensive Guide",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 2255
+  },
+  "SAP Document and Reporting Compliance The Comprehensive Guide to Finance and Tax.pdf": {
+    "archivo_pdf": "SAP Document and Reporting Compliance The Comprehensive Guide to Finance and Tax.pdf",
+    "titulo_limpio": "[SAP Press] SAP Document and Reporting Compliance (DRC): Finance & Tax",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 2116
+  },
+  "SAP Fiori Apps for SAP S4HANA The Quick Reference Guide.pdf": {
+    "archivo_pdf": "SAP Fiori Apps for SAP S4HANA The Quick Reference Guide.pdf",
+    "titulo_limpio": "[SAP Press] SAP Fiori Apps for SAP S/4HANA: The Quick Reference Guide",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 3420
+  },
+  "SAP Fiori Elements Developlement and Extensibility.pdf": {
+    "archivo_pdf": "SAP Fiori Elements Developlement and Extensibility.pdf",
+    "titulo_limpio": "[SAP Press] SAP Fiori Elements: Development and Extensibility",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 995
+  },
+  "SAP Gateway and OData (2016).pdf": {
+    "archivo_pdf": "SAP Gateway and OData (2016).pdf",
+    "titulo_limpio": "[SAP Press] SAP Gateway and OData (Edición 2016)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 2171
+  },
+  "SAP Gateway and OData (2019)_SAPPRESS.pdf": {
+    "archivo_pdf": "SAP Gateway and OData (2019)_SAPPRESS.pdf",
+    "titulo_limpio": "[SAP Press] SAP Gateway and OData (Edición 2019)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 2448
+  },
+  "SAP Gateway and OData (2024).pdf": {
+    "archivo_pdf": "SAP Gateway and OData (2024).pdf",
+    "titulo_limpio": "[SAP Press] SAP Gateway and OData (Edición 2024)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 2068
+  },
+  "SAP Gateway and OData (2nd Edition).pdf": {
+    "archivo_pdf": "SAP Gateway and OData (2nd Edition).pdf",
+    "titulo_limpio": "[SAP Press] SAP Gateway and OData (2nd Edition)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1664
+  },
+  "SAP HR - Manual de programacion en HR.pdf": {
+    "archivo_pdf": "SAP HR - Manual de programacion en HR.pdf",
+    "titulo_limpio": "[Manual Especializado] Manual de Programación ABAP para Recursos Humanos (HR)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 281
+  },
+  "SAP Integration Suite Certification Guide.pdf": {
+    "archivo_pdf": "SAP Integration Suite Certification Guide.pdf",
+    "titulo_limpio": "[SAP Press] SAP Integration Suite Certification Guide",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 1121
+  },
+  "SAP Interactive Forms by Adobe.pdf": {
+    "archivo_pdf": "SAP Interactive Forms by Adobe.pdf",
+    "titulo_limpio": "[SAP Press] SAP Interactive Forms by Adobe (Adobe Forms)",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "EN",
+    "total_bloques": 1770
+  },
+  "SAP LSMW Creacion Cliente.pdf": {
+    "archivo_pdf": "SAP LSMW Creacion Cliente.pdf",
+    "titulo_limpio": "[Manual Especializado] Creación de Clientes mediante LSMW",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "EN",
+    "total_bloques": 6
+  },
+  "SAP Press - Logistics with SAP S4HANA - An Introduction.pdf": {
+    "archivo_pdf": "SAP Press - Logistics with SAP S4HANA - An Introduction.pdf",
+    "titulo_limpio": "[SAP Press] Logistics with SAP S/4HANA: An Introduction",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 1100
+  },
+  "SAP Press - Pricing and.pdf": {
+    "archivo_pdf": "SAP Press - Pricing and.pdf",
+    "titulo_limpio": "[SAP Press] Pricing and the Condition Technique in SAP ERP & S/4HANA",
+    "categoria": "SD",
+    "idioma": "EN",
+    "total_bloques": 1493
+  },
+  "SAP Press - SAP Gateway and OData 3e.pdf": {
+    "archivo_pdf": "SAP Press - SAP Gateway and OData 3e.pdf",
+    "titulo_limpio": "[SAP Press] SAP Gateway and OData (3rd Edition)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1896
+  },
+  "SAP S4HANA System Conversion Guide.pdf": {
+    "archivo_pdf": "SAP S4HANA System Conversion Guide.pdf",
+    "titulo_limpio": "[SAP Press] SAP S/4HANA System Conversion Guide",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 1627
+  },
+  "SAP SD Configuration Package - Glynn C Williams.pdf": {
+    "archivo_pdf": "SAP SD Configuration Package - Glynn C Williams.pdf",
+    "titulo_limpio": "[Manual Especializado] SAP SD Configuration Package (Glynn C. Williams)",
+    "categoria": "SD",
+    "idioma": "EN",
+    "total_bloques": 1315
+  },
+  "SAP-Bussiness-Workflow.pdf": {
+    "archivo_pdf": "SAP-Bussiness-Workflow.pdf",
+    "titulo_limpio": "[Manual Especializado] SAP Business Workflow: Configuración y Desarrollo",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "EN",
+    "total_bloques": 31
+  },
+  "SAP-PI-Monitoring-Activities-pdf.pdf": {
+    "archivo_pdf": "SAP-PI-Monitoring-Activities-pdf.pdf",
+    "titulo_limpio": "[Guía Técnica SAP] SAP PI/PO Monitoring and Operations Guide",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 21
+  },
+  "SAP-Press-Clean-ABAP-A-Style-Guide-for-Developers-2021.pdf": {
+    "archivo_pdf": "SAP-Press-Clean-ABAP-A-Style-Guide-for-Developers-2021.pdf",
+    "titulo_limpio": "[SAP Press] Clean ABAP: A Style Guide for Developers (2021)",
+    "categoria": "ABAP_CORE",
+    "idioma": "EN",
+    "total_bloques": 1065
+  },
+  "SAP-Press-DevOps-with-SAP-2023.pdf": {
+    "archivo_pdf": "SAP-Press-DevOps-with-SAP-2023.pdf",
+    "titulo_limpio": "[SAP Press] DevOps with SAP (2023)",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 1141
+  },
+  "SAP-SD-Config.pdf": {
+    "archivo_pdf": "SAP-SD-Config.pdf",
+    "titulo_limpio": "[Manual Especializado] Configuración y Parametrización en SAP SD",
+    "categoria": "SD",
+    "idioma": "EN",
+    "total_bloques": 247
+  },
+  "SAPUI5 The Comprehensive Guide.pdf": {
+    "archivo_pdf": "SAPUI5 The Comprehensive Guide.pdf",
+    "titulo_limpio": "[SAP Press] SAPUI5: The Comprehensive Guide",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 2070
+  },
+  "SAP_Application_Interface_Framework_30_EN.pdf": {
+    "archivo_pdf": "SAP_Application_Interface_Framework_30_EN.pdf",
+    "titulo_limpio": "[Guía Oficial SAP] SAP Application Interface Framework (AIF) 3.0",
+    "categoria": "GENERAL_SAP",
+    "idioma": "EN",
+    "total_bloques": 575
+  },
+  "SD_Manual_Parametrizaciones_Basicas_SD.pdf": {
+    "archivo_pdf": "SD_Manual_Parametrizaciones_Basicas_SD.pdf",
+    "titulo_limpio": "[Manual Especializado] Manual de Parametrizaciones Básicas en SAP SD",
+    "categoria": "SD",
+    "idioma": "ES",
+    "total_bloques": 175
+  },
+  "Sales and Distribution (SAP SD)Glen C Williams.pdf": {
+    "archivo_pdf": "Sales and Distribution (SAP SD)Glen C Williams.pdf",
+    "titulo_limpio": "[Manual Especializado] Implementing SAP ERP Sales and Distribution (Glynn C. Williams)",
+    "categoria": "SD",
+    "idioma": "EN",
+    "total_bloques": 1139
+  },
+  "Sales-and-Distribution-Transaction-Overview.pdf": {
+    "archivo_pdf": "Sales-and-Distribution-Transaction-Overview.pdf",
+    "titulo_limpio": "[Guía Rápida SAP] Sales and Distribution (SD) Transaction Code Overview",
+    "categoria": "SD",
+    "idioma": "EN",
+    "total_bloques": 2
+  },
+  "SapScript - Formularios.pdf": {
+    "archivo_pdf": "SapScript - Formularios.pdf",
+    "titulo_limpio": "[Manual Especializado] Diseño de Formularios SapScript",
+    "categoria": "WORKFLOW_FORMS",
+    "idioma": "EN",
+    "total_bloques": 95
+  },
+  "Sap_FI_-_Gestion_financiera_I_-_Parte_2.pdf": {
+    "archivo_pdf": "Sap_FI_-_Gestion_financiera_I_-_Parte_2.pdf",
+    "titulo_limpio": "[Academia SAP] Gestión Financiera FI I (Parte 2 - Español)",
+    "categoria": "FI_CO",
+    "idioma": "ES",
+    "total_bloques": 1079
+  },
+  "Sap_FI_Gestion_financiera_I_Parte_1_de_2.pdf": {
+    "archivo_pdf": "Sap_FI_Gestion_financiera_I_Parte_1_de_2.pdf",
+    "titulo_limpio": "[Academia SAP] Gestión Financiera FI I (Parte 1 - Español)",
+    "categoria": "FI_CO",
+    "idioma": "ES",
+    "total_bloques": 827
+  },
+  "Sap_MM_-_Aprovisionamiento_I_parte_1_de.pdf": {
+    "archivo_pdf": "Sap_MM_-_Aprovisionamiento_I_parte_1_de.pdf",
+    "titulo_limpio": "[Academia SAP] Aprovisionamiento y Compras MM I (Parte 1 - Español)",
+    "categoria": "MM_EWM",
+    "idioma": "ES",
+    "total_bloques": 1614
+  },
+  "Sap_MM_-_Aprovisionamiento_I_parte_2_de.pdf": {
+    "archivo_pdf": "Sap_MM_-_Aprovisionamiento_I_parte_2_de.pdf",
+    "titulo_limpio": "[Academia SAP] Aprovisionamiento y Compras MM I (Parte 2 - Español)",
+    "categoria": "MM_EWM",
+    "idioma": "ES",
+    "total_bloques": 1041
+  },
+  "TBW42_2_Almacenamiento_avanzado_de_datos.pdf": {
+    "archivo_pdf": "TBW42_2_Almacenamiento_avanzado_de_datos.pdf",
+    "titulo_limpio": "[Academia SAP] TBW42 - Almacenamiento Avanzado de Datos en SAP BW",
+    "categoria": "BW_ANALYTICS",
+    "idioma": "EN",
+    "total_bloques": 1572
+  },
+  "TFIN50_1_Gestion_financiera_I_Parte_1_de (2).pdf": {
+    "archivo_pdf": "TFIN50_1_Gestion_financiera_I_Parte_1_de (2).pdf",
+    "titulo_limpio": "[Academia SAP] TFIN50 - Gestión Financiera FI I (Parte 1 - Español)",
+    "categoria": "FI_CO",
+    "idioma": "ES",
+    "total_bloques": 828
+  },
+  "THR12.pdf": {
+    "archivo_pdf": "THR12.pdf",
+    "titulo_limpio": "[Academia SAP] THR12 - Recursos Humanos: Gestión y Nómina (Payroll)",
+    "categoria": "HR_HCM",
+    "idioma": "EN",
+    "total_bloques": 1016
+  },
+  "THR12_ES_Col62_FV_Part_A4.pdf": {
+    "archivo_pdf": "THR12_ES_Col62_FV_Part_A4.pdf",
+    "titulo_limpio": "[Academia SAP] THR12 - Recursos Humanos: Gestión de Tiempos y Nómina (Español)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 921
+  },
+  "TSCM50_1_ES_Col10_ILT_FV_Part_A4.pdf": {
+    "archivo_pdf": "TSCM50_1_ES_Col10_ILT_FV_Part_A4.pdf",
+    "titulo_limpio": "[Academia SAP] TSCM50 - Aprovisionamiento y Gestión de Materiales MM (Parte 1 - Español)",
+    "categoria": "MM_EWM",
+    "idioma": "ES",
+    "total_bloques": 1386
+  },
+  "TSCM50_2_ES_Col10_ILT_FV_Part_A4.pdf": {
+    "archivo_pdf": "TSCM50_2_ES_Col10_ILT_FV_Part_A4.pdf",
+    "titulo_limpio": "[Academia SAP] TSCM50 - Aprovisionamiento y Gestión de Materiales MM (Parte 2 - Español)",
+    "categoria": "MM_EWM",
+    "idioma": "ES",
+    "total_bloques": 1519
+  },
+  "TSCM52_1_ES_Col10_ILT_FV_Part_A4.pdf": {
+    "archivo_pdf": "TSCM52_1_ES_Col10_ILT_FV_Part_A4.pdf",
+    "titulo_limpio": "[Academia SAP] TSCM52 - Gestión de Stocks e Inventarios MM (Parte 1 - Español)",
+    "categoria": "MM_EWM",
+    "idioma": "ES",
+    "total_bloques": 1433
+  },
+  "TSCM52_2_Aprovisionamiento_II_parte_2_de (1).pdf": {
+    "archivo_pdf": "TSCM52_2_Aprovisionamiento_II_parte_2_de (1).pdf",
+    "titulo_limpio": "[Academia SAP] TSCM52 - Gestión de Stocks e Inventarios MM (Parte 2 - Español)",
+    "categoria": "MM_EWM",
+    "idioma": "ES",
+    "total_bloques": 802
+  },
+  "TSCM52_2_ES_Col10_ILT_FV_Part_A4.pdf": {
+    "archivo_pdf": "TSCM52_2_ES_Col10_ILT_FV_Part_A4.pdf",
+    "titulo_limpio": "[Academia SAP] TSCM52 - Gestión de Stocks e Inventarios MM (Parte 2 - Col10)",
+    "categoria": "MM_EWM",
+    "idioma": "ES",
+    "total_bloques": 785
+  },
+  "TSCM60_Cumplimiento_de_pedidosSAP_ERP.pdf": {
+    "archivo_pdf": "TSCM60_Cumplimiento_de_pedidosSAP_ERP.pdf",
+    "titulo_limpio": "[Academia SAP] TSCM60 - Procesos y Cumplimiento de Pedidos SD (Español)",
+    "categoria": "SD",
+    "idioma": "ES",
+    "total_bloques": 2063
+  },
+  "UNIVERSAL FINANCE CONVERSION FRAMEWORK FOR S4 HANNA.pdf": {
+    "archivo_pdf": "UNIVERSAL FINANCE CONVERSION FRAMEWORK FOR S4 HANNA.pdf",
+    "titulo_limpio": "[SAP Press] Universal Finance Conversion Framework for SAP S/4HANA",
+    "categoria": "S4HANA_MIGRATION",
+    "idioma": "EN",
+    "total_bloques": 166
+  },
+  "Workflow for SAP S4HANA.pdf": {
+    "archivo_pdf": "Workflow for SAP S4HANA.pdf",
+    "titulo_limpio": "[SAP Press] Workflow for SAP S/4HANA",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 2285
+  },
+  "archivetempSAPUI5 - The Comprehensive Guide (2020).pdf": {
+    "archivo_pdf": "archivetempSAPUI5 - The Comprehensive Guide (2020).pdf",
+    "titulo_limpio": "[SAP Press] SAPUI5: The Comprehensive Guide (Edición 2020)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 1924
+  },
+  "e-hanaaw-12.pdf": {
+    "archivo_pdf": "e-hanaaw-12.pdf",
+    "titulo_limpio": "[Certificación SAP] E_HANAAW_12 - ABAP for SAP HANA Specialist (Study Guide)",
+    "categoria": "HANA_PERF",
+    "idioma": "EN",
+    "total_bloques": 8
+  },
+  "openSAP_cp7_Week_2_Unit_2_ModelReuse_Presentation (1).pdf": {
+    "archivo_pdf": "openSAP_cp7_Week_2_Unit_2_ModelReuse_Presentation (1).pdf",
+    "titulo_limpio": "[openSAP] Building Applications with SAP Cloud Application Programming Model (Semana 2 - Unidad 2: ModelReuse)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 11
+  },
+  "openSAP_cp7_Week_2_Unit_3_GenericCapabilities_Presentation (1).pdf": {
+    "archivo_pdf": "openSAP_cp7_Week_2_Unit_3_GenericCapabilities_Presentation (1).pdf",
+    "titulo_limpio": "[openSAP] Building Applications with SAP Cloud Application Programming Model (Semana 2 - Unidad 3: GenericCapabilities)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 10
+  },
+  "openSAP_cp7_Week_2_Unit_4_UsingDatabases_Presentation (1).pdf": {
+    "archivo_pdf": "openSAP_cp7_Week_2_Unit_4_UsingDatabases_Presentation (1).pdf",
+    "titulo_limpio": "[openSAP] Building Applications with SAP Cloud Application Programming Model (Semana 2 - Unidad 4: UsingDatabases)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 10
+  },
+  "openSAP_cp7_Week_2_Unit_5_CustomLogic_Presentation (1).pdf": {
+    "archivo_pdf": "openSAP_cp7_Week_2_Unit_5_CustomLogic_Presentation (1).pdf",
+    "titulo_limpio": "[openSAP] Building Applications with SAP Cloud Application Programming Model (Semana 2 - Unidad 5: CustomLogic)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 13
+  },
+  "openSAP_cp7_Week_2_Unit_7_Testing_Presentation (1).pdf": {
+    "archivo_pdf": "openSAP_cp7_Week_2_Unit_7_Testing_Presentation (1).pdf",
+    "titulo_limpio": "[openSAP] Building Applications with SAP Cloud Application Programming Model (Semana 2 - Unidad 7: Testing)",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 9
+  },
+  "openSAP_fiori3_Week_1_Unit_2_dgue_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_1_Unit_2_dgue_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 1 - Unidad 2)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 12
+  },
+  "openSAP_fiori3_Week_1_Unit_3_ao_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_1_Unit_3_ao_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 1 - Unidad 3)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 17
+  },
+  "openSAP_fiori3_Week_1_Unit_4_dto_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_1_Unit_4_dto_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 1 - Unidad 4)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 22
+  },
+  "openSAP_fiori3_Week_1_Unit_5_hgsf_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_1_Unit_5_hgsf_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 1 - Unidad 5)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 16
+  },
+  "openSAP_fiori3_Week_2_Unit_1_wgdm_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_2_Unit_1_wgdm_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 2 - Unidad 1)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 9
+  },
+  "openSAP_fiori3_Week_2_Unit_2_etsds_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_2_Unit_2_etsds_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 2 - Unidad 2)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 11
+  },
+  "openSAP_fiori3_Week_2_Unit_3_dwsf_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_2_Unit_3_dwsf_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 2 - Unidad 3)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 9
+  },
+  "openSAP_fiori3_Week_2_Unit_4_hod1_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_2_Unit_4_hod1_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 2 - Unidad 4)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 24
+  },
+  "openSAP_fiori3_Week_2_Unit_5_hod2_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_2_Unit_5_hod2_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 2 - Unidad 5)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 16
+  },
+  "openSAP_fiori3_Week_2_Unit_6_bpatsf_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_2_Unit_6_bpatsf_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 2 - Unidad 6)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 17
+  },
+  "openSAP_fiori3_Week_3_Unit_2_bmwa_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_3_Unit_2_bmwa_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 3 - Unidad 2)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 17
+  },
+  "openSAP_fiori3_Week_3_Unit_3_aadwsfe_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_3_Unit_3_aadwsfe_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 3 - Unidad 3)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 13
+  },
+  "openSAP_fiori3_Week_3_Unit_4_dosfsfa_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_3_Unit_4_dosfsfa_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 3 - Unidad 4)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 16
+  },
+  "openSAP_fiori3_Week_3_Unit_5_sctssp_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_3_Unit_5_sctssp_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 3 - Unidad 5)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 13
+  },
+  "openSAP_fiori3_Week_3_Unit_6_caanmdk_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_3_Unit_6_caanmdk_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 3 - Unidad 6)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 13
+  },
+  "openSAP_fiori3_Week_3_Unit_7_bia_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_3_Unit_7_bia_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 3 - Unidad 7)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 13
+  },
+  "openSAP_fiori3_Week_4_Unit_1_usfc_Presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_4_Unit_1_usfc_Presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 4 - Unidad 1)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 11
+  },
+  "openSAP_fiori3_Week_4_Unit_2_asfo_Presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_4_Unit_2_asfo_Presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 4 - Unidad 2)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 9
+  },
+  "openSAP_fiori3_Week_4_Unit_3_csfl_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_4_Unit_3_csfl_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 4 - Unidad 3)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 14
+  },
+  "openSAP_fiori3_Week_4_Unit_4_ssf_Presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_4_Unit_4_ssf_Presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 4 - Unidad 4)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 12
+  },
+  "openSAP_fiori3_Week_4_Unit_5_ecsfl_presentation.pdf": {
+    "archivo_pdf": "openSAP_fiori3_Week_4_Unit_5_ecsfl_presentation.pdf",
+    "titulo_limpio": "[openSAP] SAP Fiori 3 Overview & Architecture (Semana 4 - Unidad 5)",
+    "categoria": "CDS_RAP_FIORI",
+    "idioma": "EN",
+    "total_bloques": 13
+  },
+  "sap-pi.pdf": {
+    "archivo_pdf": "sap-pi.pdf",
+    "titulo_limpio": "[Manual Especializado] Introducción y Arquitectura de SAP PI / Process Integration",
+    "categoria": "BTP_INTEGRATION",
+    "idioma": "EN",
+    "total_bloques": 82
+  },
+  "unidad1.pdf": {
+    "archivo_pdf": "unidad1.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 01)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 108
+  },
+  "unidad10.pdf": {
+    "archivo_pdf": "unidad10.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 10)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 31
+  },
+  "unidad11.pdf": {
+    "archivo_pdf": "unidad11.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 11)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 38
+  },
+  "unidad12.pdf": {
+    "archivo_pdf": "unidad12.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 12)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 24
+  },
+  "unidad13.pdf": {
+    "archivo_pdf": "unidad13.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 13)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 12
+  },
+  "unidad14.pdf": {
+    "archivo_pdf": "unidad14.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 14)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 18
+  },
+  "unidad15.pdf": {
+    "archivo_pdf": "unidad15.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 15)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 21
+  },
+  "unidad16.pdf": {
+    "archivo_pdf": "unidad16.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 16)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 98
+  },
+  "unidad17.pdf": {
+    "archivo_pdf": "unidad17.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 17)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 67
+  },
+  "unidad18.pdf": {
+    "archivo_pdf": "unidad18.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 18)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 47
+  },
+  "unidad19.pdf": {
+    "archivo_pdf": "unidad19.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 19)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 25
+  },
+  "unidad2.pdf": {
+    "archivo_pdf": "unidad2.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 02)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 96
+  },
+  "unidad20.pdf": {
+    "archivo_pdf": "unidad20.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 20)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 14
+  },
+  "unidad21.pdf": {
+    "archivo_pdf": "unidad21.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 21)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 17
+  },
+  "unidad22.pdf": {
+    "archivo_pdf": "unidad22.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 22)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 20
+  },
+  "unidad23.pdf": {
+    "archivo_pdf": "unidad23.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 23)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 59
+  },
+  "unidad3.pdf": {
+    "archivo_pdf": "unidad3.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 03)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 67
+  },
+  "unidad4.pdf": {
+    "archivo_pdf": "unidad4.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 04)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 26
+  },
+  "unidad5.pdf": {
+    "archivo_pdf": "unidad5.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 05)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 26
+  },
+  "unidad6.pdf": {
+    "archivo_pdf": "unidad6.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 06)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 12
+  },
+  "unidad7.pdf": {
+    "archivo_pdf": "unidad7.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 07)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 20
+  },
+  "unidad8.pdf": {
+    "archivo_pdf": "unidad8.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 08)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 53
+  },
+  "unidad9.pdf": {
+    "archivo_pdf": "unidad9.pdf",
+    "titulo_limpio": "[Academia SAP] THR10 - Recursos Humanos / Gestión de Personal (Unidad 09)",
+    "categoria": "HR_HCM",
+    "idioma": "ES",
+    "total_bloques": 45
+  }
+}

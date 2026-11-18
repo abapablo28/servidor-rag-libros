@@ -232,7 +232,9 @@ def listar_libros_sap(categoria_o_filtro: Optional[str] = None) -> str:
             f_low = categoria_o_filtro.strip().lower()
             catalogo = [
                 b for b in catalogo
-                if f_low in b["fuente"].lower() or f_low in b["categoria"].lower()
+                if f_low in b["fuente"].lower()
+                or f_low in b.get("titulo", "").lower()
+                or f_low in b["categoria"].lower()
             ]
         return json.dumps({
             "total_libros": len(catalogo),

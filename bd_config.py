@@ -45,8 +45,29 @@ DB_PATH = os.path.join(BASE_DIR, "base_vectores")
 SQLITE_PATH = os.path.join(DB_PATH, "chroma.sqlite3")
 CATALOG_CACHE_PATH = os.path.join(DB_PATH, "catalogo_cache.json")
 CLEAN_CORE_CACHE_PATH = os.path.join(BASE_DIR, "clean_core_catalog.json.gz")
+TITULOS_MAP_PATH = os.path.join(BASE_DIR, "titulos_libros_sap.json")
 ZIP_PATH = os.path.join(BASE_DIR, "base_vectores.zip")
 URL_DEL_ZIP = "https://huggingface.co/datasets/abappablo/rag-abap/resolve/main/base_vectores.zip"
+
+_MAPA_TITULOS: Optional[Dict[str, str]] = None
+
+
+def obtener_titulo_limpio_libro(fuente: str) -> str:
+    """Devuelve el título limpio, oficial y catalogado del libro (ej: '[SAP Press] Clean ABAP')."""
+    global _MAPA_TITULOS
+    if _MAPA_TITULOS is None:
+        _MAPA_TITULOS = {}
+        for p in (TITULOS_MAP_PATH, os.path.join(DB_PATH, "titulos_libros_sap.json")):
+            if os.path.exists(p):
+                try:
+                    with open(p, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        for k, v in data.items():
+                            _MAPA_TITULOS[k] = v.get("titulo_limpio", k) if isinstance(v, dict) else str(v)
+                    break
+                except Exception:
+                    pass
+    return _MAPA_TITULOS.get(fuente, fuente)
 
 # Archivos duplicados o irrelevantes detectados en la base para excluirlos automáticamente
 LIBROS_IGNORADOS = {
@@ -317,12 +338,12 @@ def _codificar_consulta(texto: str) -> List[float]:
 # ==============================================================================
 @lru_cache(maxsize=1)
 def obtener_catalogo_libros() -> List[Dict[str, Any]]:
-    """Devuelve la lista depurada de libros en la BD con caché en disco para lectura instantánea (< 1ms)."""
+    """Devuelve la lista depurada de libros en la BD con títulos limpios y caché en disco para lectura instantánea (< 1ms)."""
     if os.path.exists(CATALOG_CACHE_PATH):
         try:
             with open(CATALOG_CACHE_PATH, "r", encoding="utf-8") as f:
                 datos = json.load(f)
-                if isinstance(datos, list) and len(datos) > 0:
+                if isinstance(datos, list) and len(datos) > 0 and "titulo" in datos[0]:
                     return datos
         except Exception:
             pass
@@ -342,15 +363,17 @@ def obtener_catalogo_libros() -> List[Dict[str, Any]]:
             categoria = clasificar_libro(nombre)
             n_low = nombre.lower()
             idioma = "ES" if any(x in n_low for x in ["_es", ".es-", "gestion", "aprovisionamiento", "manual", "implantacion", "contabilidad", "cumplimiento", "practica", "unidad", "memoria"]) else "EN"
+            titulo_limpio = obtener_titulo_limpio_libro(nombre)
             catalogo.append({
                 "fuente": nombre,
+                "titulo": titulo_limpio,
                 "categoria": categoria,
                 "idioma": idioma,
                 "total_bloques": total_bloques,
             })
         try:
             with open(CATALOG_CACHE_PATH, "w", encoding="utf-8") as f:
-                json.dump(catalogo, f, ensure_ascii=False)
+                json.dump(catalogo, f, ensure_ascii=False, indent=2)
         except Exception:
             pass
         return catalogo
@@ -575,7 +598,7 @@ def _buscar_fts5_sqlite(
             fuente, str_bloque = eid.rsplit("_chunk_", 1)
             if fuente in LIBROS_IGNORADOS:
                 continue
-            if filtro_norm and filtro_norm not in _normalizar_para_match(fuente):
+            if filtro_norm and filtro_norm not in _normalizar_para_match(fuente) and filtro_norm not in _normalizar_para_match(obtener_titulo_limpio_libro(fuente)):
                 continue
             try:
                 bloque = int(str_bloque)
@@ -612,7 +635,7 @@ def buscar_hibrido_sap(
     filtro_norm = _normalizar_para_match(libro_filtro) if libro_filtro else None
     libros_dominio = set()
     if filtro_norm:
-        libros_dominio = {b["fuente"] for b in catalogo if filtro_norm in _normalizar_para_match(b["fuente"])}
+        libros_dominio = {b["fuente"] for b in catalogo if filtro_norm in _normalizar_para_match(b["fuente"]) or filtro_norm in _normalizar_para_match(b.get("titulo", ""))}
     elif info_query["categorias"]:
         cats = set(info_query["categorias"])
         libros_dominio = {b["fuente"] for b in catalogo if b["categoria"] in cats}
@@ -769,9 +792,11 @@ def buscar_hibrido_sap(
             rango_bloques = str(bloque)
 
         cat_libro = clasificar_libro(fuente)
-        encabezado_contextual = f"[Manual SAP: {fuente} | Dominio: {cat_libro} | Bloques: {rango_bloques}]\n"
+        titulo_limpio = obtener_titulo_limpio_libro(fuente)
+        encabezado_contextual = f"[Manual SAP: {titulo_limpio} (Archivo: {fuente}) | Dominio: {cat_libro} | Bloques: {rango_bloques}]\n"
         resultados_finales.append({
             "fuente": fuente,
+            "titulo": titulo_limpio,
             "categoria": cat_libro,
             "bloque": bloque,
             "rango_bloques": rango_bloques,
