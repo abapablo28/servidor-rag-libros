@@ -70,17 +70,26 @@ pip install -r requirements.txt
 
 ## 🔌 Configuración en Clientes
 
-### Antigravity / Claude Desktop (Modo Local `stdio`)
+### Antigravity / Claude Desktop (Modo Local `stdio` con `uv`)
 Añade lo siguiente en tu archivo de configuración de MCP (`mcp_config.json` o `claude_desktop_config.json`):
 
 ```json
 {
   "mcpServers": {
     "sap-libros": {
-      "command": "python",
+      "command": "uv",
       "args": [
-        "/ruta/hacia/servidor-rag-libros/server.py"
-      ]
+        "run",
+        "--quiet",
+        "--no-sync",
+        "--directory",
+        "C:/ruta/hacia/servidor-rag-libros",
+        "server.py"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
     }
   }
 }
