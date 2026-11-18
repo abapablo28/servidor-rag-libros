@@ -2,11 +2,14 @@ import os
 import re
 import sys
 import json
+import gzip
+import ssl
 import sqlite3
 import hashlib
 import warnings
 import zipfile
 import urllib.request
+import urllib.parse
 from functools import lru_cache
 from typing import List, Dict, Any, Optional, Tuple
 
@@ -41,6 +44,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "base_vectores")
 SQLITE_PATH = os.path.join(DB_PATH, "chroma.sqlite3")
 CATALOG_CACHE_PATH = os.path.join(DB_PATH, "catalogo_cache.json")
+CLEAN_CORE_CACHE_PATH = os.path.join(BASE_DIR, "clean_core_catalog.json.gz")
 ZIP_PATH = os.path.join(BASE_DIR, "base_vectores.zip")
 URL_DEL_ZIP = "https://huggingface.co/datasets/abappablo/rag-abap/resolve/main/base_vectores.zip"
 
@@ -780,13 +784,395 @@ def buscar_hibrido_sap(
 
 
 # ==============================================================================
+# CATÁLOGO OFICIAL SAP CLOUDIFICATION REPOSITORY (CLEAN CORE & SUCESORES S/4HANA)
+# ==============================================================================
+_CACHE_CLEAN_CORE: Optional[Dict[str, Any]] = None
+_CACHE_CLEAN_CORE_POR_NOMBRE: Optional[Dict[str, List[Dict[str, Any]]]] = None
+
+_URLS_CLOUDIFICATION_REPO = {
+    "classic": ("https://raw.githubusercontent.com/SAP/abap-atc-cr-cv-s4hc/main/src/objectClassifications_SAP.json", "objectClassifications"),
+    "btp": ("https://raw.githubusercontent.com/SAP/abap-atc-cr-cv-s4hc/main/src/objectReleaseInfo_BTPLatest.json", "objectReleaseInfo"),
+    "public_cloud": ("https://raw.githubusercontent.com/SAP/abap-atc-cr-cv-s4hc/main/src/objectReleaseInfoLatest.json", "objectReleaseInfo"),
+    "pce_s4hana": ("https://raw.githubusercontent.com/SAP/abap-atc-cr-cv-s4hc/main/src/objectReleaseInfo_PCELatest.json", "objectReleaseInfo"),
+}
+
+
+def _clasificar_nivel_clean_core(state: str) -> Dict[str, str]:
+    """Traduce el estado técnico del Cloudification Repository al Nivel oficial de Clean Core (A, B, C, D)."""
+    st = (state or "").strip()
+    if st == "released":
+        return {
+            "nivel": "Level A",
+            "estado": "released",
+            "resumen": "Liberado oficialmente para ABAP Cloud (100% Clean Core & Upgrade-Safe).",
+        }
+    if st == "classicAPI":
+        return {
+            "nivel": "Level B",
+            "estado": "classicAPI",
+            "resumen": "API Clásica recomendada por SAP (usar mediante wrapper Tier-2 cuando no exista API Nivel A).",
+        }
+    if st == "deprecated":
+        return {
+            "nivel": "Level C/D",
+            "estado": "deprecated",
+            "resumen": "Objeto obsoleto/deprecado en S/4HANA. Debe reemplazarse por su sucesor oficial Nivel A.",
+        }
+    if st in ("notToBeReleased", "noAPI"):
+        return {
+            "nivel": "Level D",
+            "estado": st,
+            "resumen": "No liberado para ABAP Cloud (No Clean Core). Reemplazar por vista CDS o API sucesora.",
+        }
+    return {
+        "nivel": "Level C",
+        "estado": st or "internal",
+        "resumen": "Objeto interno o sin clasificación directa de liberación pública.",
+    }
+
+
+def _obtener_catalogo_clean_core() -> Tuple[Dict[str, Dict[str, Any]], Dict[str, List[Dict[str, Any]]]]:
+    """
+    Carga en memoria los ~68,694 objetos oficiales del SAP Cloudification Repository
+    desde clean_core_catalog.json.gz (o los descarga automáticamente del GitHub oficial de SAP si no existe).
+    """
+    global _CACHE_CLEAN_CORE, _CACHE_CLEAN_CORE_POR_NOMBRE
+    if _CACHE_CLEAN_CORE is not None and _CACHE_CLEAN_CORE_POR_NOMBRE is not None:
+        return _CACHE_CLEAN_CORE, _CACHE_CLEAN_CORE_POR_NOMBRE
+
+    with _init_lock:
+        if _CACHE_CLEAN_CORE is not None and _CACHE_CLEAN_CORE_POR_NOMBRE is not None:
+            return _CACHE_CLEAN_CORE, _CACHE_CLEAN_CORE_POR_NOMBRE
+
+        ruta_gz = CLEAN_CORE_CACHE_PATH
+        if not os.path.exists(ruta_gz):
+            alt_gz = os.path.join(DB_PATH, "clean_core_catalog.json.gz")
+            if os.path.exists(alt_gz):
+                ruta_gz = alt_gz
+
+        catalog: Dict[str, Dict[str, Any]] = {}
+        if os.path.exists(ruta_gz):
+            try:
+                with gzip.open(ruta_gz, "rt", encoding="utf-8") as f:
+                    catalog = json.load(f)
+            except Exception:
+                catalog = {}
+
+        # Si no existía el archivo local, lo construye desde el GitHub oficial de SAP
+        if not catalog:
+            ctx = ssl._create_unverified_context()
+            for _, (url, root_key) in _URLS_CLOUDIFICATION_REPO.items():
+                try:
+                    req = urllib.request.urlopen(url, context=ctx, timeout=15)
+                    items = json.loads(req.read().decode("utf-8")).get(root_key, [])
+                    for item in items:
+                        tadir_obj = item.get("tadirObject", "")
+                        tadir_name = item.get("tadirObjName", "")
+                        obj_type = item.get("objectType", tadir_obj)
+                        obj_key = item.get("objectKey", tadir_name)
+                        primary_name = obj_key if obj_type == "FUNC" else (tadir_name or obj_key)
+                        if not primary_name:
+                            continue
+                        succs = []
+                        for s in item.get("successors", []):
+                            s_type = s.get("objectType") or s.get("tadirObject", "")
+                            s_name = s.get("objectKey") or s.get("tadirObjName", "")
+                            if s_name:
+                                succs.append({"type": s_type, "name": s_name})
+                        if item.get("successorConceptName"):
+                            succs.append({"type": "CONCEPT", "name": item.get("successorConceptName")})
+
+                        key = f"{obj_type}:{primary_name.upper()}"
+                        existing = catalog.get(key, {})
+                        catalog[key] = {
+                            "type": obj_type,
+                            "tadirType": tadir_obj or existing.get("tadirType", ""),
+                            "name": primary_name.upper(),
+                            "parent": tadir_name if obj_type == "FUNC" else existing.get("parent", ""),
+                            "comp": item.get("applicationComponent", "") or existing.get("comp", ""),
+                            "sw": item.get("softwareComponent", "") or existing.get("sw", ""),
+                            "state": item.get("state", "") or existing.get("state", ""),
+                            "labels": item.get("labels", existing.get("labels", [])),
+                            "succ": succs if succs else existing.get("succ", []),
+                        }
+                except Exception:
+                    continue
+            if catalog:
+                try:
+                    with gzip.open(CLEAN_CORE_CACHE_PATH, "wt", encoding="utf-8") as f:
+                        json.dump(catalog, f, separators=(",", ":"))
+                except Exception:
+                    pass
+
+        por_nombre: Dict[str, List[Dict[str, Any]]] = {}
+        for _, info in catalog.items():
+            nom = info.get("name", "")
+            if nom:
+                por_nombre.setdefault(nom, []).append(info)
+
+        _CACHE_CLEAN_CORE = catalog
+        _CACHE_CLEAN_CORE_POR_NOMBRE = por_nombre
+        return _CACHE_CLEAN_CORE, _CACHE_CLEAN_CORE_POR_NOMBRE
+
+
+def consultar_clean_core_sap(
+    objetos_o_busqueda: str,
+    nivel_filtro: Optional[str] = None,
+    tipo_objeto: Optional[str] = None,
+    cruzar_con_libros: bool = True,
+) -> Dict[str, Any]:
+    """
+    Motor de Compatibilidad S/4HANA & Clean Core (basado en SAP Cloudification Repository, estilo ROSA).
+    Permite:
+    1. Auditar una lista de objetos SAP (ej: 'MARA, BSEG, KNA1, BAPI_PO_CREATE1') y obtener su nivel Clean Core (A, B, C, D)
+       y sus sucesores oficiales liberados (ej: I_Product, I_OperationalAcctgDocItem, I_Customer).
+    2. Buscar objetos y APIs liberadas por palabras clave o componente (ej: 'PurchaseOrder', 'Billing', 'BusinessPartner').
+    3. Cruzar automáticamente los objetos y sus sucesores con los 184 libros de SAP Press/Academia.
+    """
+    catalog, por_nombre = _obtener_catalogo_clean_core()
+    if not catalog:
+        return {"error": "No se pudo cargar el catálogo de SAP Cloudification Repository."}
+
+    entrada = (objetos_o_busqueda or "").strip()
+    if not entrada:
+        return {"error": "Debe indicar al menos un objeto SAP o término de búsqueda."}
+
+    candidatos_raw = [t.strip().upper() for t in re.split(r"[,;\s]+", entrada) if len(t.strip()) >= 2]
+    filtro_nivel = (nivel_filtro or "").strip().upper()
+    filtro_tipo = (tipo_objeto or "").strip().upper()
+
+    resultados_exactos = []
+    terminos_no_exactos = []
+
+    for cand in candidatos_raw:
+        matches = por_nombre.get(cand, [])
+        if matches:
+            for m in matches:
+                if filtro_tipo and filtro_tipo not in (m.get("type", "").upper(), m.get("tadirType", "").upper()):
+                    continue
+                cc_info = _clasificar_nivel_clean_core(m.get("state", ""))
+                if filtro_nivel and filtro_nivel not in cc_info["nivel"].upper() and filtro_nivel not in cc_info["estado"].upper():
+                    continue
+                # Enriquecer cada sucesor con su propio estado Clean Core
+                sucesores_enriquecidos = []
+                for s in m.get("succ", []):
+                    s_name = s.get("name", "").upper()
+                    s_matches = por_nombre.get(s_name, [])
+                    s_state = s_matches[0].get("state", "released") if s_matches else "released"
+                    s_cc = _clasificar_nivel_clean_core(s_state)
+                    sucesores_enriquecidos.append({
+                        "objeto_sucesor": s.get("name", ""),
+                        "tipo": s.get("type", ""),
+                        "clean_core_nivel": s_cc["nivel"],
+                        "estado": s_cc["estado"],
+                    })
+
+                resultados_exactos.append({
+                    "objeto": m.get("name"),
+                    "tipo_objeto": m.get("type"),
+                    "tadir_tipo": m.get("tadirType"),
+                    "grupo_funcion": m.get("parent") or None,
+                    "componente_aplicacion": m.get("comp"),
+                    "componente_software": m.get("sw"),
+                    "clean_core_nivel": cc_info["nivel"],
+                    "estado_liberacion": cc_info["estado"],
+                    "evaluacion": cc_info["resumen"],
+                    "etiquetas": m.get("labels", []),
+                    "sucesores_oficiales": sucesores_enriquecidos,
+                })
+        else:
+            terminos_no_exactos.append(cand)
+
+    # Búsqueda inteligente multi-token si no hubo match exacto (o para términos descriptivos)
+    resultados_busqueda = []
+    if not resultados_exactos and terminos_no_exactos:
+        tokens = [t for t in terminos_no_exactos if len(t) >= 2]
+        scored = []
+        for nom, lista_infos in por_nombre.items():
+            for info in lista_infos:
+                if filtro_tipo and filtro_tipo not in (info.get("type", "").upper(), info.get("tadirType", "").upper()):
+                    continue
+                cc_info = _clasificar_nivel_clean_core(info.get("state", ""))
+                if filtro_nivel and filtro_nivel not in cc_info["nivel"].upper() and filtro_nivel not in cc_info["estado"].upper():
+                    continue
+
+                comp = info.get("comp", "").upper()
+                score = 0
+                for tok in tokens:
+                    if tok == nom:
+                        score += 100
+                    elif nom.startswith(tok) or nom.startswith(f"I_{tok}") or nom.startswith(f"CL_{tok}"):
+                        score += 50
+                    elif tok in nom:
+                        score += 25
+                    elif tok in comp:
+                        score += 15
+                if score > 0:
+                    # Priorizar APIs liberadas Nivel A y objetos con sucesores claros
+                    if info.get("state") == "released":
+                        score += 10
+                    elif info.get("succ"):
+                        score += 5
+                    scored.append((score, info, cc_info))
+
+        scored.sort(key=lambda x: x[0], reverse=True)
+        for score, m, cc_info in scored[:15]:
+            sucesores_enriquecidos = [
+                {"objeto_sucesor": s.get("name", ""), "tipo": s.get("type", "")}
+                for s in m.get("succ", [])
+            ]
+            resultados_busqueda.append({
+                "objeto": m.get("name"),
+                "tipo_objeto": m.get("type"),
+                "componente_aplicacion": m.get("comp"),
+                "clean_core_nivel": cc_info["nivel"],
+                "estado_liberacion": cc_info["estado"],
+                "evaluacion": cc_info["resumen"],
+                "sucesores_oficiales": sucesores_enriquecidos,
+            })
+
+    # Cruzar con los 184 libros en SQLite FTS5
+    referencias_libros = []
+    if cruzar_con_libros:
+        conn = _obtener_conexion_sqlite()
+        if conn is not None:
+            terminos_libro = []
+            for r in (resultados_exactos or resultados_busqueda)[:4]:
+                terminos_libro.append(r["objeto"])
+                for s in r.get("sucesores_oficiales", [])[:2]:
+                    terminos_libro.append(s["objeto_sucesor"])
+            terminos_libro = [t for t in dict.fromkeys(terminos_libro) if len(t) >= 3]
+            if terminos_libro:
+                expr = " OR ".join([f'"{t}"' for t in terminos_libro[:5]])
+                try:
+                    sql = """
+                        SELECT e.embedding_id, f.string_value
+                        FROM embedding_fulltext_search f
+                        JOIN embeddings e ON f.rowid = e.id
+                        WHERE embedding_fulltext_search MATCH ?
+                        LIMIT 5
+                    """
+                    for eid, txt in conn.execute(sql, (expr,)).fetchall():
+                        if "_chunk_" not in eid:
+                            continue
+                        fuente, str_chunk = eid.rsplit("_chunk_", 1)
+                        if fuente in LIBROS_IGNORADOS:
+                            continue
+                        referencias_libros.append({
+                            "fuente": fuente,
+                            "categoria": clasificar_libro(fuente),
+                            "bloque": int(str_chunk) if str_chunk.isdigit() else 0,
+                            "extracto": txt[:320].replace("\n", " ").strip(),
+                        })
+                except Exception:
+                    pass
+
+    # Métricas de cumplimiento Clean Core
+    todos = resultados_exactos or resultados_busqueda
+    total_eval = len(todos)
+    cumplen = sum(1 for r in todos if r["clean_core_nivel"] in ("Level A", "Level B"))
+    tasa = round((cumplen / total_eval) * 100, 1) if total_eval else 0.0
+
+    return {
+        "fuente_oficial": "SAP Cloudification Repository (S/4HANA PCE, Public Cloud, BTP & Classic APIs)",
+        "total_objetos_catalogo": len(catalog),
+        "objetos_evaluados": total_eval,
+        "tasa_cumplimiento_clean_core": f"{tasa}%",
+        "resultados_exactos": resultados_exactos,
+        "resultados_busqueda": resultados_busqueda,
+        "citas_en_tus_libros_sap": referencias_libros,
+    }
+
+
+# ==============================================================================
+# CONSULTA EN VIVO A SAP HELP PORTAL & SAP COMMUNITY (DOCUMENTACIÓN OFICIAL)
+# ==============================================================================
+def consultar_sap_help_oficial(
+    consulta: str,
+    incluir_comunidad: bool = True,
+    max_resultados: int = 5,
+) -> Dict[str, Any]:
+    """
+    Consulta la documentación oficial autorizada de SAP Help Portal (help.sap.com) y
+    SAP Community (community.sap.com), devolviendo URLs oficiales, títulos y fragmentos,
+    y cruzándolos con los manuales locales de la biblioteca.
+    """
+    q = (consulta or "").strip()
+    if not q:
+        return {"error": "La consulta no puede estar vacía."}
+
+    ctx = ssl._create_unverified_context()
+    resultados_sap_help = []
+    resultados_comunidad = []
+
+    def _llamar_endpoint_docs(tool_name: str, args: Dict[str, Any]) -> List[Dict[str, Any]]:
+        for endpoint in ("https://mcp-abap.marianzeis.de/mcp", "http://mcp-sap-docs.marianzeis.de/mcp"):
+            try:
+                payload = json.dumps({
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "tools/call",
+                    "params": {"name": tool_name, "arguments": args},
+                }).encode("utf-8")
+                req = urllib.request.Request(
+                    endpoint,
+                    data=payload,
+                    headers={
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text/event-stream",
+                        "User-Agent": "MCP-SAP-Libros/2.0",
+                    },
+                    method="POST",
+                )
+                with urllib.request.urlopen(req, context=ctx, timeout=8) as resp:
+                    raw = resp.read().decode("utf-8", errors="replace")
+                    for line in raw.splitlines():
+                        if line.startswith("data: "):
+                            obj = json.loads(line[6:])
+                            content = obj.get("result", {}).get("content", [])
+                            if content and "text" in content[0]:
+                                parsed = json.loads(content[0]["text"])
+                                return parsed.get("results", [])
+            except Exception:
+                continue
+        return []
+
+    docs = _llamar_endpoint_docs("search", {"query": q})
+    for d in docs[:max_resultados]:
+        resultados_sap_help.append({
+            "titulo": d.get("title", ""),
+            "url_oficial": d.get("url", ""),
+            "biblioteca": d.get("library_id", ""),
+            "fragmento_autorizado": (d.get("snippet", "") or "")[:450],
+        })
+
+    if incluir_comunidad:
+        comm = _llamar_endpoint_docs("sap_community_search", {"query": q})
+        for c in comm[:max(3, max_resultados // 2)]:
+            resultados_comunidad.append({
+                "titulo": c.get("title", ""),
+                "url_oficial": c.get("url", ""),
+                "autor": c.get("author", ""),
+                "fecha": c.get("published", ""),
+                "fragmento_autorizado": (c.get("snippet", "") or "")[:400],
+            })
+
+    return {
+        "consulta": q,
+        "total_sap_help": len(resultados_sap_help),
+        "documentacion_oficial_sap_help": resultados_sap_help,
+        "comunidad_oficial_sap": resultados_comunidad,
+    }
+
+
+# ==============================================================================
 # RESOLUCIÓN INTELIGENTE DE NOTAS SAP CITADAS EN LOS LIBROS
 # ==============================================================================
 def resolver_nota_sap(numero_o_tema: str, contexto_adicional: Optional[str] = None) -> Dict[str, Any]:
     """
     Localiza y explica una Nota SAP citada en la biblioteca de manuales oficiales.
-    Extrae el propósito oficial, por qué los autores la recomiendan, los impactos de arquitectura
-    y genera el enlace oficial me.sap.com/notes/<numero>.
+    Extrae el propósito oficial, por qué los autores la recomiendan, los impactos de arquitectura,
+    los objetos Clean Core relacionados y genera el enlace oficial me.sap.com/notes/<numero>.
     """
     texto_input = f"{numero_o_tema} {contexto_adicional or ''}".strip()
     match_num = re.search(r"\b([0-9]{5,8})\b", texto_input)
@@ -857,13 +1243,35 @@ def resolver_nota_sap(numero_o_tema: str, contexto_adicional: Optional[str] = No
             except Exception:
                 pass
 
+    # 3. Detectar objetos SAP mencionados en los extractos y verificar su estado Clean Core
+    objetos_clean_core = []
+    try:
+        _, por_nombre = _obtener_catalogo_clean_core()
+        texto_citas = " ".join([c["extracto"] for c in citas]) + " " + texto_input
+        tokens_mayus = set(re.findall(r"\b[A-Z][A-Z0-9_/]{3,30}\b", texto_citas))
+        ignorados = {"NOTE", "NOTES", "HANA", "S4HANA", "ABAP", "TABLE", "REPORT", "CHECK", "SYSTEM", "FIGURE", "CHAPTER"}
+        for tok in sorted(tokens_mayus):
+            if tok in ignorados or tok not in por_nombre:
+                continue
+            for m in por_nombre[tok][:1]:
+                cc = _clasificar_nivel_clean_core(m.get("state", ""))
+                objetos_clean_core.append({
+                    "objeto": tok,
+                    "tipo": m.get("type"),
+                    "clean_core_nivel": cc["nivel"],
+                    "sucesores": [s.get("name") for s in m.get("succ", [])],
+                })
+    except Exception:
+        pass
+
     return {
         "numero_nota": numero,
-        "enlace_oficial": f"https://me.sap.com/notes/{numero}" if numero else None,
+        "enlace_oficial_launchpad": f"https://me.sap.com/notes/{numero}" if numero else None,
         "total_citas_encontradas": len(citas),
         "referencias_en_libros": citas,
+        "objetos_clean_core_relacionados": objetos_clean_core[:8],
         "consejo_aplicacion": (
-            f"Para consultar la corrección técnica completa, visita {f'https://me.sap.com/notes/{numero}' if numero else 'el portal SAP'}. "
+            f"Para consultar la corrección técnica completa con tu S-User, visita {f'https://me.sap.com/notes/{numero}' if numero else 'el Launchpad de SAP'}. "
             "En el sistema SAP GUI puedes revisar su estado o implementarla directamente mediante la transacción SNOTE."
         ),
     }

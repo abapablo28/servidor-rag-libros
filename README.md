@@ -37,7 +37,11 @@ Permite a clientes de IA como **Antigravity**, **Claude Desktop**, **Claude Web*
 5. `listar_libros_sap(categoria_o_filtro=None)`:
    * Lista el catálogo depurado de manuales disponibles en caché instantánea (<2 ms).
 6. `consultar_nota_sap(numero_o_tema, contexto_adicional=None)`:
-   * Resuelve y contextualiza Notas SAP y Simplification Items citados en los libros de SAP Press/Academia, explicando su impacto en arquitectura y generando el enlace oficial directo `https://me.sap.com/notes/<numero>` (100% gratuito, sin requerir cuenta paga).
+   * Resuelve y contextualiza Notas SAP y Simplification Items citados en los libros de SAP Press/Academia, detecta objetos Clean Core afectados y genera el enlace oficial directo al Launchpad `https://me.sap.com/notes/<numero>`.
+7. `consultar_clean_core_sucesores(objetos_o_busqueda, nivel_filtro=None, tipo_objeto=None, cruzar_con_libros=True)`:
+   * Motor integrado del **SAP Cloudification Repository** (~68,694 objetos oficiales para S/4HANA Private/Public Cloud, BTP ABAP Environment y Classic APIs, estilo ROSA). Audita el nivel Clean Core (`Level A`, `Level B`, `Level C`, `Level D`), indica qué vista CDS o API liberada reemplaza a tablas/BAPIs clásicas (`MARA` → `I_PRODUCT`, `BSEG` → `I_OPERATIONALACCTGDOCITEM`, `KNA1` → `I_CUSTOMER`) y lo cruza con tus libros.
+8. `consultar_sap_help_oficial_web(consulta, incluir_comunidad=True, max_resultados=5)`:
+   * Consulta en vivo URLs, secciones y fragmentos autorizados de **SAP Help Portal** (`help.sap.com`) y **SAP Community** (`community.sap.com`) para complementar la biblioteca con documentación oficial en línea.
 
 ---
 

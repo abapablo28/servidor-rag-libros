@@ -10,6 +10,9 @@ from bd_config import (
     obtener_coleccion,
     obtener_modelo,
     resolver_nota_sap,
+    consultar_clean_core_sap,
+    consultar_sap_help_oficial,
+    _obtener_catalogo_clean_core,
     _obtener_conexion_sqlite,
 )
 
@@ -18,6 +21,7 @@ def _calentar_servidor():
     try:
         _obtener_conexion_sqlite()
         obtener_catalogo_libros()
+        _obtener_catalogo_clean_core()
         obtener_coleccion()
         obtener_modelo()
     except Exception:
@@ -29,15 +33,17 @@ threading.Thread(target=_calentar_servidor, daemon=True).start()
 # INSTRUCCIONES GLOBALES DEL SERVIDOR MCP (Para Claude, Antigravity y ChatGPT)
 # ==============================================================================
 INSTRUCCIONES_SISTEMA = """
-Eres un asistente conectado a la Biblioteca Oficial de Libros y Manuales de Academia SAP (Servidor-RAG-SAP).
-Contiene ~180 libros oficiales de SAP Press y manuales de Academia SAP en español e inglés (ABAP, Clean ABAP, OO ABAP, CDS, RAP, Fiori/UI5, Migración S/4HANA/ATC, HANA Performance HA400, Ampliaciones BC425, FI S4F12-17/TFIN50, MM TSCM50/52, SD TSCM60, EWM, Workflow, SmartForms/Adobe, BTP/CPI, HCM THR12, BW TBW42).
+Eres un asistente conectado a la Biblioteca Oficial de Libros y Manuales de Academia SAP + Motor Clean Core & SAP Help (Servidor-RAG-SAP).
+Contiene ~184 libros oficiales de SAP Press y manuales de Academia SAP en español e inglés (ABAP, Clean ABAP, OO ABAP, CDS, RAP, Fiori/UI5, Migración S/4HANA/ATC, HANA Performance HA400, Ampliaciones BC425, FI S4F12-17/TFIN50, MM TSCM50/52, SD TSCM60, EWM, Workflow, SmartForms/Adobe, BTP/CPI, HCM THR12, BW TBW42) + 68,694 objetos oficiales del SAP Cloudification Repository (estilo ROSA).
 
 REGLAS DE USO PARA RESPONDER CON ALTA CALIDAD Y VELOCIDAD:
 1. SIEMPRE que el usuario pida código ABAP, vistas CDS, RAP, optimización SQL HANA, migración a S/4HANA o tenga una consulta funcional (FI, MM, SD, EWM, BTP, etc.), consulta primero este MCP antes de responder de memoria.
 2. Muchos de los mejores libros técnicos de SAP Press están en INGLÉS y los manuales de academia están en ESPAÑOL. Por eso, al llamar a `consultar_conocimiento`, `consultar_abap_tecnico` o `consultar_proceso_funcional`, rellena SIEMPRE el parámetro `query_en` con la traducción técnica al inglés de la consulta.
 3. Para máxima rapidez, pide entre 3 y 5 resultados (`cantidad_resultados=4` por defecto). Si un fragmento devuelto muestra un código ABAP o una explicación paso a paso que continúa en el bloque siguiente, usa `leer_paginas_libro(fuente, bloque_inicio, bloque_fin)` para leer los bloques siguientes del mismo libro.
-4. Si en un libro o en tu análisis encuentras citada una Nota SAP (ej. Note 2267308, Note 2568736, Note 1648480, etc.), usa la herramienta `consultar_nota_sap(numero_o_tema)` para obtener el resumen oficial, el impacto en arquitectura y el enlace directo me.sap.com/notes/<numero>.
-5. En tu respuesta final al usuario, cita los manuales de SAP utilizados (nombre del PDF y bloques) y adapta el código o la explicación funcional fielmente a las buenas prácticas del libro.
+4. Si en un libro o en tu análisis encuentras citada una Nota SAP (ej. Note 2399707, Note 2267308, Note 1648480, etc.), usa `consultar_nota_sap(numero_o_tema)` para obtener el resumen oficial de los libros, los objetos Clean Core afectados y el enlace directo al Launchpad me.sap.com/notes/<numero>.
+5. Cuando el usuario pregunte por compatibilidad S/4HANA, Clean Core (Niveles A, B, C, D), objetos obsoletos o qué vista CDS / API usar en lugar de tablas o BAPIs clásicas (ej. MARA, BSEG, KNA1, KONV, BAPI_PO_CREATE1), usa `consultar_clean_core_sucesores(objetos_o_busqueda)`.
+6. Cuando necesites enlaces y fragmentos actualizados de la documentación oficial web de SAP Help Portal (`help.sap.com`) o blogs de SAP Community, usa `consultar_sap_help_oficial_web(consulta)`.
+7. En tu respuesta final al usuario, cita los manuales de SAP utilizados (nombre del PDF y bloques) y adapta el código o la explicación funcional fielmente a las buenas prácticas del libro y Clean Core.
 """.strip()
 
 mcp = FastMCP(
@@ -244,11 +250,11 @@ def consultar_nota_sap(numero_o_tema: str, contexto_adicional: Optional[str] = N
     """
     Localiza y explica una Nota SAP o Simplification Item citado en la biblioteca de manuales oficiales.
     Extrae por qué los autores de SAP Press/Academia recomiendan esta nota, los cambios arquitectónicos
-    o de datos asociados (ej: CVI, ACDOCA, MATNR, ST03N, S4TWL) y genera el enlace oficial directo me.sap.com/notes/<numero>.
-    No requiere ninguna cuenta paga de SAP.
+    o de datos asociados (ej: CVI, ACDOCA, MATNR, ST03N, S4TWL), los objetos Clean Core afectados y genera
+    el enlace oficial directo al Launchpad me.sap.com/notes/<numero>.
 
     Args:
-        numero_o_tema: Número de la Nota SAP (ej. '2267308', '1648480', '2568736') o nombre del tema/reporte ('/SDF/RC_START', 'SD Pricing data model', 'CVI Business Partner').
+        numero_o_tema: Número de la Nota SAP (ej. '2399707', '2267308', '1648480') o nombre del tema/reporte ('/SDF/RC_START', 'SD Pricing data model', 'CVI Business Partner').
         contexto_adicional: (Opcional) Términos adicionales o pregunta específica sobre la nota.
     """
     try:
@@ -256,6 +262,71 @@ def consultar_nota_sap(numero_o_tema: str, contexto_adicional: Optional[str] = N
         return json.dumps(res, ensure_ascii=False)
     except Exception as e:
         return json.dumps({"error": f"Error al resolver Nota SAP: {str(e)}"}, ensure_ascii=False)
+
+
+# ==============================================================================
+# 7. HERRAMIENTA DE COMPATIBILIDAD S/4HANA & CLEAN CORE (ESTILO ROSA INTEGRADO)
+# ==============================================================================
+@mcp.tool()
+def consultar_clean_core_sucesores(
+    objetos_o_busqueda: str,
+    nivel_filtro: Optional[str] = None,
+    tipo_objeto: Optional[str] = None,
+    cruzar_con_libros: bool = True,
+) -> str:
+    """
+    Consulta el SAP Cloudification Repository oficial integrado (~68,694 objetos SAP para S/4HANA Private/Public Cloud,
+    BTP ABAP Environment y Classic APIs, estilo ROSA).
+    Evalúa si una tabla, clase, vista CDS, función/BAPI o transacción está liberada para Clean Core (Nivel A, B, C, D),
+    encuentra sus objetos sucesores oficiales en S/4HANA (ej. MARA -> I_PRODUCT, BSEG -> I_OPERATIONALACCTGDOCITEM,
+    KNA1 -> I_CUSTOMER) y cruza la información con tus 184 libros de SAP Press y Academia.
+
+    Args:
+        objetos_o_busqueda: Uno o varios objetos separados por coma (ej. 'MARA, BSEG, KNA1, BAPI_PO_CREATE1') o término de búsqueda ('PurchaseOrder', 'BillingDocument', 'I_Product').
+        nivel_filtro: (Opcional) Filtrar por nivel Clean Core: 'Level A' (released), 'Level B' (classicAPI), 'Level C', 'Level D' (notToBeReleased/deprecated).
+        tipo_objeto: (Opcional) Filtrar por tipo TADIR: 'TABL', 'DDLS', 'CDS_STOB', 'CLAS', 'FUNC', 'BDEF', 'INTF'.
+        cruzar_con_libros: Si es True (por defecto), incluye citas y capítulos de los libros locales donde se explica el objeto o su sucesor.
+    """
+    try:
+        res = consultar_clean_core_sap(
+            objetos_o_busqueda=objetos_o_busqueda,
+            nivel_filtro=nivel_filtro,
+            tipo_objeto=tipo_objeto,
+            cruzar_con_libros=cruzar_con_libros,
+        )
+        return json.dumps(res, ensure_ascii=False)
+    except Exception as e:
+        return json.dumps({"error": f"Error al consultar Clean Core / Cloudification Repository: {str(e)}"}, ensure_ascii=False)
+
+
+# ==============================================================================
+# 8. HERRAMIENTA DE DOCUMENTACIÓN OFICIAL SAP HELP & SAP COMMUNITY
+# ==============================================================================
+@mcp.tool()
+def consultar_sap_help_oficial_web(
+    consulta: str,
+    incluir_comunidad: bool = True,
+    max_resultados: int = 5,
+) -> str:
+    """
+    Busca URLs, secciones y fragmentos autorizados en la documentación oficial de SAP Help Portal (help.sap.com,
+    ABAP Keyword Documentation, RAP/CDS/S4HANA Help) y blogs técnicos de SAP Community (community.sap.com).
+    Complementa los libros locales con enlaces oficiales vivos.
+
+    Args:
+        consulta: Término técnico, sintaxis ABAP, vista CDS, RAP o proceso funcional (preferiblemente en inglés, ej. 'RAP behavior definition determinations', 'Clean Core extensibility tiers').
+        incluir_comunidad: Si es True (por defecto), incluye también artículos y soluciones de SAP Community.
+        max_resultados: Número máximo de enlaces oficiales a devolver (por defecto 5).
+    """
+    try:
+        res = consultar_sap_help_oficial(
+            consulta=consulta,
+            incluir_comunidad=incluir_comunidad,
+            max_resultados=max_resultados,
+        )
+        return json.dumps(res, ensure_ascii=False)
+    except Exception as e:
+        return json.dumps({"error": f"Error al consultar SAP Help oficial: {str(e)}"}, ensure_ascii=False)
 
 
 # ==============================================================================
