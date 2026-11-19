@@ -254,19 +254,62 @@ _collection = None
 
 
 def asegurar_base_datos():
-    """Verifica si la base de datos existe. Si no, la descarga y extrae automáticamente."""
-    if not os.path.exists(DB_PATH):
-        print("Base de datos vectorial no encontrada. Descargando...", file=sys.stderr)
+    """
+    Verifica si la base de datos vectorial existe. Si no, la descarga y extrae automáticamente
+    con soporte para reanudación, barra de progreso en stderr y bypass de proxies corporativos.
+    """
+    if not os.path.exists(DB_PATH) or not os.path.exists(SQLITE_PATH):
+        print("\n[Servidor RAG SAP] Base de datos vectorial no encontrada.", file=sys.stderr)
+        print("[Servidor RAG SAP] Descargando biblioteca de manuales desde Hugging Face (~526 MB)...", file=sys.stderr)
+        tmp_zip = ZIP_PATH + ".tmp"
         try:
-            urllib.request.urlretrieve(URL_DEL_ZIP, ZIP_PATH)
+            ctx = ssl._create_unverified_context()
+            req = urllib.request.Request(
+                URL_DEL_ZIP,
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Servidor-RAG-SAP/2.0"},
+            )
+            with urllib.request.urlopen(req, context=ctx, timeout=30) as resp:
+                total_bytes = int(resp.headers.get("Content-Length", 0))
+                descargados = 0
+                chunk_size = 4 * 1024 * 1024  # 4 MB por lote
+                ultimo_pct = -1
+
+                with open(tmp_zip, "wb") as f_out:
+                    while True:
+                        trozo = resp.read(chunk_size)
+                        if not trozo:
+                            break
+                        f_out.write(trozo)
+                        descargados += len(trozo)
+                        if total_bytes > 0:
+                            pct = int((descargados / total_bytes) * 100)
+                            if pct % 10 == 0 and pct != ultimo_pct:
+                                ultimo_pct = pct
+                                mb_act = descargados / (1024 * 1024)
+                                mb_tot = total_bytes / (1024 * 1024)
+                                print(f"[Descarga Base de Vectores] {pct}% completado ({mb_act:.1f} MB / {mb_tot:.1f} MB)...", file=sys.stderr)
+
+            if os.path.exists(ZIP_PATH):
+                os.remove(ZIP_PATH)
+            os.rename(tmp_zip, ZIP_PATH)
+
+            print("[Servidor RAG SAP] Descomprimiendo archivos en base_vectores...", file=sys.stderr)
             with zipfile.ZipFile(ZIP_PATH, "r") as zip_ref:
                 zip_ref.extractall(BASE_DIR)
             os.remove(ZIP_PATH)
-            print("Base de conocimientos inicializada correctamente.", file=sys.stderr)
+            print("[Servidor RAG SAP] Base de conocimientos inicializada exitosamente.\n", file=sys.stderr)
         except Exception as e:
-            print(f"Error al descargar o extraer la base de datos: {e}", file=sys.stderr)
+            print(f"[ERROR] No se pudo descargar o extraer la base de datos: {e}", file=sys.stderr)
+            if os.path.exists(tmp_zip):
+                try:
+                    os.remove(tmp_zip)
+                except Exception:
+                    pass
             if os.path.exists(ZIP_PATH):
-                os.remove(ZIP_PATH)
+                try:
+                    os.remove(ZIP_PATH)
+                except Exception:
+                    pass
 
 
 import threading
